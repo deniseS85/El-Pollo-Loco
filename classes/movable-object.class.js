@@ -5,7 +5,9 @@ class MovableObject {
     height = 150;
     width = 100;
     imageCache = {}; // Json für die Bilder vom Character
-
+    currentImage = 0;
+    speed = 0.2;
+    otherDirection = false;
 
     loadImage(path) {
         this.img = new Image();
@@ -27,6 +29,8 @@ class MovableObject {
     }
 
     moveLeft() {
-
+        setInterval( () => {
+            this.x -= this.speed;
+        }, 1000 / 60);
     }
 }

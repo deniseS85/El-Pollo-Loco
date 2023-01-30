@@ -2,7 +2,8 @@ class Character extends MovableObject {
     y = 150;
     height = 280;
     width = 140;
-    CHARACTER_WALKING = [
+    speed = 5;
+    IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
         'img/2_character_pepe/2_walk/W-23.png',
@@ -10,22 +11,41 @@ class Character extends MovableObject {
         'img/2_character_pepe/2_walk/W-25.png',
         'img/2_character_pepe/2_walk/W-26.png'
     ];
-    currentImage = 0;
+    world; // zugreifen auf Variablen von world
    
-
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
-        this.loadImages(this.CHARACTER_WALKING);
+        this.loadImages(this.IMAGES_WALKING);
         this.animate();
     }
 
     animate() {
+        // nach rechts laufen
         setInterval(() => {
-            let index = this.currentImage % this.CHARACTER_WALKING.length; //setIntervall geht nur bis zum letzten Bild im Array
-            let path = this.CHARACTER_WALKING[index];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        }, 120);
+            if(this.world.keyboard.RIGHT) {
+                this.x += this.speed;
+                this.otherDirection = false;
+            }
+        }, 1000 / 60);
+
+        //nach links laufen
+        setInterval(() => {
+            if(this.world.keyboard.LEFT) {
+                this.x -= this.speed;
+                this.otherDirection = true;
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            // bewegen nur beim Drücken der Pfeiltaste rechts oder links
+            if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                // Lauf-Animation
+                let index = this.currentImage % this.IMAGES_WALKING.length; //setIntervall geht nur bis zum letzten Bild im Array (i = 0,1,2,3,4,5,0,1,2,3,4,5,...)
+                let path = this.IMAGES_WALKING[index];
+                this.img = this.imageCache[path];
+                this.currentImage++;
+            }
+        }, 50);
         
     }
 
