@@ -1,22 +1,10 @@
 class World {
     character = new Character();
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken()
-    ];
-    clouds = [
-        new Cloud()
-    ];
-    background = [
-        new BackgroundObject('img/5_background/layers/air.png'),
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png'),
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png'),
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png')
-    ];
+    level = level1;
     canvas;
-    ctx;
+    ctx; //Sammlung an Funktionen von JS, um Objekte im Canvas hinzuzufügen
     keyboard;
+    camera_x = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -24,8 +12,16 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.moveLeftBackground;
     }
 
+    moveLeftBackground() {
+        for (let i = 0; i < this.background.length; i+719) {
+            
+            console.log(this.background[i]);
+
+        }
+    }
     // damit Charakter auf Pfeiltasten reagieren kann
     setWorld() {
         this.character.world = this;
@@ -35,11 +31,16 @@ class World {
     draw() {
         // Bild wird vor dem Neuladen gelöscht
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.translate(this. camera_x, 0);
+
         // Objekte werden hinzugefügt zum Canva
-        this.addObjectsToMap(this.background);
-        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.level.background);
+        this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.enemies);
+
+        this.ctx.translate(-this.camera_x, 0);
 
         // Draw() wird immer wieder aufgerufen
         let self = this;
@@ -55,18 +56,21 @@ class World {
         });
     }
 
-    // Werte x, y, Breite und Höhe zum Hinzufügen der Bilder
     addToMap(moveObject) {
+        // Spiegelung vom Charakter
         if(moveObject.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(moveObject.width, 0);
-            this.ctx.scale(-1, 1);
-            moveObject.x = moveObject.x * -1;
+            this.ctx.save(); // Eigenschaften vom Canvas werden gespeichert (wie Screenshot)
+            this.ctx.translate(moveObject.width, 0); //Verschieben Weite des Characters, um die Position zu behalten (sonst springt er nach links)
+            this.ctx.scale(-1, 1); //Spiegelung um die eigene Achse --> (-1/1)
+            moveObject.x = moveObject.x * -1; // x-Achse wird gespiegelt
         }
+        // Welt zeichnen mit Koordinaten, Breite und Höhe
         this.ctx.drawImage(moveObject.img, moveObject.x, moveObject.y, moveObject.width, moveObject.height);
+
+        // Spiegelung für andere Objekte deaktivieren
         if(moveObject.otherDirection) {
-            moveObject.x = moveObject.x * -1;
-            this.ctx.restore();
+            moveObject.x = moveObject.x * -1; // x-Achse wird wieder ungespiegelt
+            this.ctx.restore(); // reseten zu dem Punkt vor Spiegelung zurück, damit alle anderen Objekte nicht gespiegelt werden
         }
     }
    
