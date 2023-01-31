@@ -26,7 +26,9 @@ window.addEventListener('keydown', (event) => {
     if(event.key == "ArrowDown") {
         keyboard.DOWN = true;
     }
-
+    if (event.key == "d") {
+        keyboard.D = true;
+    }
 });
 
 // Beim Loslassen der Taste
@@ -46,5 +48,8 @@ window.addEventListener('keyup', (event) => {
     }
     if(event.key == "ArrowDown") {
         keyboard.DOWN = false;
+    }
+    if (event.key == "d") {
+        keyboard.D = false;
     }
 });
