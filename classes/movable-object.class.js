@@ -39,7 +39,6 @@ class MovableObject extends DrawableObject{
         } else {
             return this.y < 150;
         }
-       
     }
 
     // nach rechts gehen

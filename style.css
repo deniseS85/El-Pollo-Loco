@@ -1,11 +1,126 @@
+@font-face {
+font-family: "Alphawood";
+src: url("fonts/alphawood.woff") format("woff")
+}
+
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: url('img/background.jpg');
+    background-size: 100% 100%;
 }
 
+h1 {
+    font-size: 90px;
+    font-family: 'Alphawood';
+ 
+}
+
+.menu {
+    position: relative;
+}
+
+.menu img {
+    width: 720px;
+    height: 480px;
+}
+
+button {
+    position: absolute;
+    top: 45px;
+    background-color: rgb(255, 150, 1);
+    color: black;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 5px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 130px;
+    box-shadow: 2px 2px 6px #6d3205, -2px -2px 6px #6d3205;
+}
+
+button:hover {
+    background-color: rgb(228, 146, 30);
+}
+
+.start {
+    left: 25%;
+}
+
+.control {
+    right: 25%;
+  
+}
 canvas {
     background-color: black;
+    display: none;
+}
+
+.popUp {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: unset;
+    padding-bottom: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(255, 150, 1);
+    border-radius: 15px;
+    box-shadow: 2px 2px 6px #6d3205, -2px -2px 6px #6d3205;
+    padding-top: 8px;
+    width: 400px;
+    height: 200px;
+    margin: auto;
+}
+
+.popUpLeft, .popUpRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.popUpRight div {
+    margin-top: 4px;
+    margin-bottom: 7px;
+}
+
+.popUpLeft img {
+    width: 30px;
+    height: 30px;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.d-none {
+    display: none;
+}
+
+.overlay-bg {
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.startGameAnimation {
+    animation-name: fadeInOpacity;
+	animation-timing-function: ease-in;
+	animation-duration: 225ms;
 }
