@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="style.css">
     <script src="classes/world.class.js"></script>
     <script src="classes/drawable-object.class.js"></script>
-    <script src="classes/status-bar.class.js"></script>
+    <script src="classes/status-bar-bottles.class.js"></script>
+    <script src="classes/status-bar-life.class.js"></script>
+    <script src="classes/status-bar-coins.class.js"></script>
+    <script src="classes/coins.class.js"></script>
     <script src="classes/movable-object.class.js"></script>
     <script src="classes/background-object.class.js"></script>
     <script src="classes/cloud.class.js"></script>
@@ -23,33 +26,41 @@
     <script src="js/game.js"></script>
     <title>El Pollo Loco</title>
 </head>
-<body > <!-- onload="init()" -->
-   
-    <h1>El Pollo loco</h1>
+<body>
+    
+    <div id="initPage" class="init-page">
+        <img id="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
+        <button class="start-btn" onclick="init(), playAudio('audio/klick-button.mp3')">Start</button>
+        <button class="control-btn" onclick="openPopUp()">Control</button>
 
-        <div id="menu" class="menu">
-            <img id="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
-            <button class="start" onclick="init(), playAudio('audio/klick-button.mp3')">Start</button>
-            <button class="control" onclick="openPopUp()">Control</button>
-
-            <div id ="popUp" class="popUp d-none">
-               <div class="popUpLeft">
-                    <img src="img/arrow_right.png">
-                    <img src="img/arrow_left.png">
-                    <img src="img/arrow_up.png">
-                    <img src="img/enter.png" style="width: 40px; height: 40px;">
-               </div>
-               <div class="popUpRight">
-                    <div>Walk Right</div>
-                    <div>Walk Left</div>
-                    <div>Jump</div>
-                    <div>Throw Bottles</div>
-                </div>   
+        <div id ="popUp" class="popUp d-none">
+            <div class="popUpLeft">
+                <img src="img/arrow_right.png">
+                <img src="img/arrow_left.png">
+                <img src="img/arrow_up.png">
+                <img src="img/enter.png" style="width: 40px; height: 40px;">
             </div>
+            <div class="popUpRight">
+                <div>Walk Right</div>
+                <div>Walk Left</div>
+                <div>Jump</div>
+                <div>Throw Bottles</div>
+            </div>   
         </div>
-
-       
+    </div>
+    
+    <div id="canvas-container" class="canvas-container d-none">
         <canvas id="canvas" width="720" height="480"></canvas>
+        <img onclick="stopMusic()" class="music-off" src="img/music-off.png">
+        <img onclick="stopSound()" class="mute" src="img/mute.png">
+        <img class="control" src="img/control.png">
+        <img onclick="fullscreen()" class="fullscreen" src="img/fullscreen.png">
+    </div>
+   
+   
+
+   
+   
    
    
 

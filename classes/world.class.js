@@ -5,7 +5,10 @@ class World {
     ctx; //Sammlung an Funktionen von JS, um Objekte im Canvas hinzuzufügen
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusBarLife = new StatusBarLife();
+    statusBarBottle = new StatusBarBottle();
+    statusBarCoin = new StatusBarCoin();
+    coins = new Coins();
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -32,7 +35,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hurt();
-                this.statusBar.reduceLife(this.character.energy);
+                this.statusBarLife.reduceLife(this.character.energy);
             }
         });
     }
@@ -56,9 +59,13 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.coins);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarLife);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        
 
         // Draw() wird immer wieder aufgerufen
         let self = this;

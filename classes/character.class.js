@@ -39,6 +39,7 @@ class Character extends MovableObject {
     ];
     world; // zugreifen auf Variablen von world
     walk_sound = new Audio('audio/walk.mp3');
+    jump_sound = new Audio('audio/jump.mp3');
    
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -65,6 +66,7 @@ class Character extends MovableObject {
          
             if (this.world.keyboard.UP && !this.isJumping()) {
                 this.jump();
+                this.jump_sound.play();
             }
              // Kameraführung
             this.world.camera_x = -this.x + 100;
@@ -85,4 +87,7 @@ class Character extends MovableObject {
             }
         }, 80);
     }
+
+    
+
 }
