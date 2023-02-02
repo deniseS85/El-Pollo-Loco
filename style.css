@@ -42,15 +42,15 @@ h1 {
 
 .game-content .frame-bg {
     position: absolute;
-    top: -80px;
-    left: -80px;
-    width: calc(100% + 160px);
-    height: calc(100% + 160px);
+    top: -79px;
+    left: -75px;
+    width: calc(100% + 165px);
+    height: calc(100% + 178px);
 }
 
 button {
     position: absolute;
-    top: -13px;
+    top: -10px;
     width: 171px;
     height: 82px;
     padding: 5px 24px;
@@ -67,10 +67,39 @@ button {
     z-index: 2;
 }
 
-/* button:hover {
-   
-} */
+button:hover {
+    animation-timing-function: ease-in-out;
+    animation-name: headShake;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
 
+@keyframes headShake {
+    0% {
+      transform: translateX(0);
+    }
+  
+    6.5% {
+      transform: translateX(-6px) rotateY(-9deg);
+    }
+  
+    18.5% {
+      transform: translateX(5px) rotateY(7deg);
+    }
+  
+    31.5% {
+      transform: translateX(-3px) rotateY(-5deg);
+    }
+  
+    43.5% {
+      transform: translateX(2px) rotateY(3deg);
+    }
+  
+    50% {
+      transform: translateX(0);
+    }
+}
+  
 .start-btn {
     left: 25%;
 }
@@ -153,10 +182,11 @@ canvas {
 
 .fullscreen {
     position: absolute;
-    top: 423px;
-    right: 9px;
-    width: 48px;
+    top: 425px;
+    right: 10px;
+    width: 30px;
     cursor: pointer;
+    z-index: 10;
 }
 
 .fullscreen:hover {
@@ -176,11 +206,12 @@ canvas {
     width: 48px;
     position: absolute;
     cursor: pointer;
+    z-index: 10;
 }
 
 .music-off {
     top: 10px;
-    right: 146px;
+    right: 150px;
 }
 
 .music-off:hover {
@@ -189,7 +220,7 @@ canvas {
 
 .mute {
     top: 10px;
-    right: 85px;
+    right: 89px;
 }
 
 .mute:hover {
@@ -198,7 +229,7 @@ canvas {
 
 .control {
     top: 7px;
-    right: 20px;
+    right: 24px;
 }
 
 .control:hover {

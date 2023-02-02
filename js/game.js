@@ -14,7 +14,8 @@ function init() {
 }
 
 function playAudio(url) {
-    new Audio(url);
+        let audio = new Audio(url);
+        audio.play();
 }
 
 function changeClasses() {

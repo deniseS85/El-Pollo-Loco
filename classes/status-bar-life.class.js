@@ -13,10 +13,10 @@ class StatusBarLife extends DrawableObject{
     constructor() {
         super();
         this.loadImages(this.IMAGES_LIFE);
-        this.y = 50;
-        this.x = 20;
+        this.y = 45;
+        this.x = 30;
         this.width = 200;
-        this.height = 60;
+        this.height = 50;
         this.reduceLife(100);
     }
 
