@@ -27,6 +27,10 @@ h1 {
     top: 20px;
 }
 
+.game-content {
+    position: relative;
+}
+
 .init-page {
     position: relative;
 }
@@ -34,9 +38,14 @@ h1 {
 .init-page img {
     width: 720px;
     height: 480px;
-   /*  border: 38px solid transparent;
-    border-image: url(img/frame-bg.png) stretch stretch;
-    border-image-slice: 14%; */
+}
+
+.game-content .frame-bg {
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: calc(100% + 160px);
+    height: calc(100% + 160px);
 }
 
 button {
@@ -74,7 +83,6 @@ canvas {
     background-color: black;
     display: none;
     position: absolute;
-   
 }
 
 .popUp {

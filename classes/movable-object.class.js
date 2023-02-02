@@ -2,9 +2,15 @@ class MovableObject extends DrawableObject{
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
-    acceleration = 2.5;
+    acceleration = 2.5; // Beschleunigung
     energy = 100;
     lastHurt = 0;
+    offset = { // Bereich zwischen Objektframe und dem Objekt selber
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    };
 
 
     // Lauf-Animation
@@ -59,17 +65,22 @@ class MovableObject extends DrawableObject{
     }
 
     // Berechnung Koordinaten für die Kollision der Objekte
-    isColliding(moveObject) {
-        return  this.x + this.width > moveObject.x &&
-                this.y + this.height > moveObject.y &&
-                this.x < moveObject.x &&
-                this.y < moveObject.y + moveObject.height
-    
-        /* (this.x + this.width) >= moveObject.x && 
-                this.x <= (moveObject.x + moveObject.width) && 
-                (this.y + this.offsetY + this.height) >= moveObject.y &&
-                (this.y + this.offsetY) <= (moveObject.y + moveObject.height) && 
-                moveObject.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann. */
+    isCollidingChicken(moveObject) {
+        return ( 
+        this.x + this.width - this.offset.left > moveObject.x &&
+        this.y + this.height > moveObject.y &&
+        this.x < moveObject.x - this.offset.left + moveObject.width &&
+        this.y < moveObject.y + moveObject.height
+        );
+    }
+
+    isCollidingCollectables(moveObject) {
+        return (
+        this.x + this.width - this.offset.right > moveObject.x + moveObject.offset.left &&
+        this.y + this.height - this.offset.bottom > moveObject.y + moveObject.offset.top &&
+        this.x + this.offset.left < moveObject.x + moveObject.width - moveObject.offset.right &&
+        this.y + this.y + this.offset.top < moveObject.y + moveObject.height - moveObject.offset.bottom
+        );
     }
 
     hurt() {
@@ -87,7 +98,7 @@ class MovableObject extends DrawableObject{
         return timepassed < 1;
     }
 
-     isDead() {
+    isDead() {
         return this.energy == 0;
     }
 

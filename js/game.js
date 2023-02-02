@@ -6,14 +6,22 @@ let isMusic = false;
 
 
 function init() {
-    document.getElementById('initPage').style.display = 'none';
     canvas = document.getElementById('canvas');
+    changeClasses();
+    world = new World(canvas, keyboard);
+    //game_music.play('audio/game-loop.mp3');
+    isMusic = true;
+}
+
+function playAudio(url) {
+    new Audio(url);
+}
+
+function changeClasses() {
+    document.getElementById('initPage').style.display = 'none';
     canvas.style.display = 'block';
     canvas.classList.add('startGameAnimation');
     document.getElementById('canvas-container').classList.remove('d-none');
-    world = new World(canvas, keyboard);
-    game_music.play('audio/game-loop.mp3');
-    isMusic = true;
 }
 
 

@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1;
+    level = startLevel1();
     canvas;
     ctx; //Sammlung an Funktionen von JS, um Objekte im Canvas hinzuzufügen
     keyboard;
@@ -8,8 +8,8 @@ class World {
     statusBarLife = new StatusBarLife();
     statusBarBottle = new StatusBarBottle();
     statusBarCoin = new StatusBarCoin();
-    coins = new Coins();
     throwableObjects = [];
+    coins = new Coins();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,7 +33,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isCollidingChicken(enemy)) {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
             }
@@ -51,15 +51,13 @@ class World {
     draw() {
         // Bild wird vor dem Neuladen gelöscht
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this. camera_x, 0);
-
         // Objekte werden hinzugefügt zum Canva
         this.addObjectsToMap(this.level.background);
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.coins);
+        this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarLife);
