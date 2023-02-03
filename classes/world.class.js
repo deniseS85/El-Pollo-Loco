@@ -10,6 +10,7 @@ class World {
     statusBarCoin = new StatusBarCoin();
     throwableObjects = [];
     coins = new Coins();
+    bottles = new Bottles();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -18,6 +19,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.playAudio();
     }
     // damit Charakter auf Pfeiltasten reagieren kann
     setWorld() {
@@ -28,6 +30,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThroughObject();
+            this.checkCollectCoins();
         }, 200);
     }
 
@@ -40,9 +43,23 @@ class World {
         });
     }
 
+    coinCollected(coin) {
+        let i = this.level.coins.indexOf(coin);
+        this.level.coins.splice(i, 1);
+    }
+
+    checkCollectCoins() {
+        this.level.coins.forEach((coin) => {
+            if (this.character.isCollidingCollectables(coin)) {
+                this.coinCollected(coin);
+                playAudio('audio/coins.mp3');
+            }
+        })
+    }
+
     checkThroughObject() {
         if (this.keyboard.SPACE) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
             this.throwableObjects.push(bottle);
         }
     }
@@ -55,9 +72,10 @@ class World {
         // Objekte werden hinzugefügt zum Canva
         this.addObjectsToMap(this.level.background);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarLife);

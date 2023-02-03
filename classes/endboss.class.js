@@ -49,9 +49,9 @@ class Endboss extends MovableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING_ENDBOSS[0]);
-        this.loadImages(this.IMAGES_WALKING_ENDBOSS);
+        super().loadImage(this.IMAGES_ALERT_ENDBOSS[0]);
         this.loadImages(this.IMAGES_ALERT_ENDBOSS);
+        this.loadImages(this.IMAGES_WALKING_ENDBOSS);
         this.loadImages(this.IMAGES_ATTACK_ENDBOSS);
         this.loadImages(this.IMAGES_HURT_ENDBOSS);
         this.loadImages(this.IMAGES_DEAD_ENDBOSS);
@@ -62,7 +62,7 @@ class Endboss extends MovableObject {
     animate() {
         setInterval(() => {
             // Lauf-Animation
-           this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
+           this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
         }, 200);
     }
 }

@@ -8,7 +8,7 @@ class Chicken extends MovableObject {
         right: 0,
         bottom: 10,
     };
-    IMAGES_WALKING = [
+    IMAGES_CHICKEN = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
@@ -16,7 +16,7 @@ class Chicken extends MovableObject {
 
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_CHICKEN);
         // Jedes Chicken ist an einer anderes Stelle an der x-Achse
         this.x = 400 + Math.random() * 5000;
         // Jedes Chicken hat eine andere Geschwindigkeit
@@ -30,7 +30,7 @@ class Chicken extends MovableObject {
 
         setInterval(() => {
             // Lauf-Animation
-           this.playAnimation(this.IMAGES_WALKING);
+           this.playAnimation(this.IMAGES_CHICKEN);
         }, 200);
     }
 }
