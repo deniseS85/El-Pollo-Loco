@@ -17,12 +17,11 @@ class StatusBarCoin extends DrawableObject{
         this.x = 30;
         this.width = 200;
         this.height = 50;
-        this.collectCoin(0);
+        this.collectCoins(0);
     }
 
-    collectCoin(percentage) {
+    collectCoins(percentage) {
         this.percentage = percentage;
-        console.log(percentage);
         let path = this.IMAGES_COINS[this.coinStatus()];
         this.img = this.imageCache[path];
     }

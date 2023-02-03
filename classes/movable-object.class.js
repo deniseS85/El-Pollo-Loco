@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject{
     acceleration = 2.5; // Beschleunigung
     energy = 100;
     coin = 0;
+    bottle = 0;
     lastHurt = 0;
     offset = { // Bereich zwischen Objektframe und dem Objekt selber
         top: 0,
@@ -99,10 +100,17 @@ class MovableObject extends DrawableObject{
         return timepassed < 1;
     }
 
-    collect() {
+    collectCoin() {
         this.coin += 1;
         if (this.coin > 24) {
             this.coin = 25;
+        }
+    }
+
+    collectBottle() {
+        this.bottle += 1;
+        if (this.bottle > 9) {
+            this.bottle = 10;
         }
     }
 
