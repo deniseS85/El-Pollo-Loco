@@ -22,23 +22,24 @@ class StatusBarCoin extends DrawableObject{
 
     collectCoin(percentage) {
         this.percentage = percentage;
+        console.log(percentage);
         let path = this.IMAGES_COINS[this.coinStatus()];
         this.img = this.imageCache[path];
     }
 
     coinStatus() {
-        if (this.percentage == 100) {
-            return 5;
-        } else if (this.percentage > 80) {
-            return 4;
-        } else if (this.percentage > 60) {
-            return 3;
-        } else if (this.percentage > 40) {
-            return 2;
-        } else if (this.percentage > 20) {
-            return 1;
-        } else { 
+        if (this.percentage == 0) {
             return 0;
-        }
+        } else if (this.percentage < 5) {
+            return 1;
+        } else if (this.percentage < 10) {
+            return 2;
+        } else if (this.percentage < 15) {
+            return 3;
+        } else if (this.percentage <= 24) {
+            return 4;
+        } else { 
+            return 5;
+        } 
     }
 }

@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject{
     speedY = 0;
     acceleration = 2.5; // Beschleunigung
     energy = 100;
+    coin = 0;
     lastHurt = 0;
     offset = { // Bereich zwischen Objektframe und dem Objekt selber
         top: 0,
@@ -96,6 +97,13 @@ class MovableObject extends DrawableObject{
         let timepassed = new Date().getTime() - this.lastHurt;
         timepassed = timepassed / 1000;
         return timepassed < 1;
+    }
+
+    collect() {
+        this.coin += 1;
+        if (this.coin > 24) {
+            this.coin = 25;
+        }
     }
 
     isDead() {

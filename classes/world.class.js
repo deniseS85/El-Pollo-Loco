@@ -19,7 +19,6 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        this.playAudio();
     }
     // damit Charakter auf Pfeiltasten reagieren kann
     setWorld() {
@@ -28,33 +27,32 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCollisionsChicken();
             this.checkThroughObject();
             this.checkCollectCoins();
         }, 200);
     }
 
-    checkCollisions() {
+    checkCollisionsChicken() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isCollidingChicken(enemy)) {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
+                playAudio('audio/hurt.mp3');
             }
         });
     }
 
-    coinCollected(coin) {
-        let i = this.level.coins.indexOf(coin);
-        this.level.coins.splice(i, 1);
-    }
-
+    
     checkCollectCoins() {
-        this.level.coins.forEach((coin) => {
+        this.level.coins.forEach((coin, i) => {
             if (this.character.isCollidingCollectables(coin)) {
-                this.coinCollected(coin);
+                this.character.collect();
+                this.statusBarCoin.collectCoin(this.character.coin);
+                this.level.coins.splice(i, 1);
                 playAudio('audio/coins.mp3');
             }
-        })
+        });
     }
 
     checkThroughObject() {

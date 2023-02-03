@@ -85,6 +85,7 @@ function startLevel1() {
             new Coins(900, 100),
             new Coins(1000, 100),
             new Coins(1100, 100),
+            new Coins(1200, 100),
 
             new Coins(1900, 200),
             new Coins(1950, 150),
