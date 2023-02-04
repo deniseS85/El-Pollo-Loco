@@ -114,6 +114,10 @@ class MovableObject extends DrawableObject{
         }
     }
 
+    reduceBottleByThrowing() {
+        this.bottle -= 1;
+    }
+
     isDead() {
         return this.energy == 0;
     }

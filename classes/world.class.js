@@ -11,6 +11,7 @@ class World {
     coins = new Coins();
     bottles = new Bottles();
     throwableObjects = [];
+    amountCollectBottles = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -44,7 +45,6 @@ class World {
         });
     }
 
-    
     checkCollectCoins() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isCollidingCollectables(coin)) {
@@ -62,21 +62,22 @@ class World {
                 this.character.collectBottle();
                 this.statusBarBottle.collectBottles(this.character.bottle);
                 this.level.bottles.splice(i, 1);
+                this.amountCollectBottles++;
                 playAudio('audio/bottle.mp3');
             }
         });
     }
 
-
     checkThroughObject() {
-        if (this.keyboard.SPACE) {
+        if (this.keyboard.SPACE && this.amountCollectBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
-            this.throwableObjects.push(bottle);
-            
+            this.throwableObjects.push(bottle); 
+            this.character.reduceBottleByThrowing();
+            this.statusBarBottle.collectBottles(this.character.bottle);
+            this.amountCollectBottles--;
         }
     }
-
-
+    
     draw() {
         // Bild wird vor dem Neuladen gelöscht
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

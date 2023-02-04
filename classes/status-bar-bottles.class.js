@@ -22,7 +22,6 @@ class StatusBarBottle extends DrawableObject {
 
     collectBottles(percentage) {
         this.percentage = percentage;
-        console.log(percentage);
         let path = this.IMAGES_BOTTLE[this.bottleStatus()];
         this.img = this.imageCache[path];
     }
