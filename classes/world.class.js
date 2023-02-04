@@ -8,8 +8,6 @@ class World {
     statusBarLife = new StatusBarLife();
     statusBarBottle = new StatusBarBottle();
     statusBarCoin = new StatusBarCoin();
-    coins = new Coins();
-    bottles = new Bottles();
     throwableObjects = [];
     amountCollectBottles = 0;
 
@@ -28,11 +26,12 @@ class World {
 
     run() {
         setInterval(() => {
+            this.checkJumpOnChicken();
             this.checkCollisionsChicken();
             this.checkThroughObject();
             this.checkCollectCoins();
             this.checkCollectBottles();
-        }, 200);
+        }, 100);
     }
 
     checkCollisionsChicken() {
@@ -41,6 +40,17 @@ class World {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
                 playAudio('audio/hurt.mp3');
+            }
+        });
+    }
+
+    checkJumpOnChicken() {
+        this.level.enemies.forEach((enemy, i) => {
+            if (this.character.isCollidingChicken(enemy) &&
+                this.character.isJumping() ) {
+                this.character.jump();
+                this.level.enemies.splice(i, 1);
+                playAudio('audio/chicken.wav');
             }
         });
     }
@@ -77,6 +87,7 @@ class World {
             this.amountCollectBottles--;
         }
     }
+
     
     draw() {
         // Bild wird vor dem Neuladen gelöscht

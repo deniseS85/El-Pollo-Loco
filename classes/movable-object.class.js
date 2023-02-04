@@ -76,6 +76,7 @@ class MovableObject extends DrawableObject{
         );
     }
 
+
     isCollidingCollectables(moveObject) {
         return (
         this.x + this.width - this.offset.right > moveObject.x + moveObject.offset.left &&

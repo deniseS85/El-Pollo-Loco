@@ -9,7 +9,7 @@ function init() {
     canvas = document.getElementById('canvas');
     changeClasses();
     world = new World(canvas, keyboard);
-    //game_music.play('audio/game-loop.mp3');
+    game_music.play('audio/game-loop.mp3');
     isMusic = true;
 }
 
