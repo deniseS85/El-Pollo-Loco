@@ -4,7 +4,6 @@ let keyboard = new Keyboard();
 let game_music = new Audio('audio/game-loop.mp3');
 let isMusic = false;
 
-
 function init() {
     canvas = document.getElementById('canvas');
     changeClasses();
@@ -43,6 +42,13 @@ function stopMusic() {
         game_music.play();
         isMusic = true;
     }
+}
+
+function stopSound() {
+    this.soundEffects.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
 }
 
 

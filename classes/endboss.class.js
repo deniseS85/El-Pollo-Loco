@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
     x = 5400;
     width = 350;
     height = 400;
+    speed = 3;
     offset = {
         top: 50,
         left: 5,
@@ -10,7 +11,6 @@ class Endboss extends MovableObject {
         bottom: 10,
     };
    
-
     IMAGES_WALKING_ENDBOSS = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
         'img/4_enemie_boss_chicken/1_walk/G2.png',
@@ -49,20 +49,56 @@ class Endboss extends MovableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_ALERT_ENDBOSS[0]);
-        this.loadImages(this.IMAGES_ALERT_ENDBOSS);
+        super().loadImage(this.IMAGES_WALKING_ENDBOSS[0]);
         this.loadImages(this.IMAGES_WALKING_ENDBOSS);
+        this.loadImages(this.IMAGES_ALERT_ENDBOSS);
         this.loadImages(this.IMAGES_ATTACK_ENDBOSS);
         this.loadImages(this.IMAGES_HURT_ENDBOSS);
         this.loadImages(this.IMAGES_DEAD_ENDBOSS);
         this.animate();
     }
 
+/* 
+    animate() {
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD_ENDBOSS);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT_ENDBOSS);
+            } */ /* else if (this.isJumping()) {
+                this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
+            } */ /* else {
+               this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
+                
+            }
+        }, 140);
+
+        
+    } */
 
     animate() {
         setInterval(() => {
-            // Lauf-Animation
-           this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
-        }, 200);
-    }
+            if (world.character.x > 5000) {
+                this.move_left();
+                this.otherDirection = false;
+            }
+        }, 800);
+
+        setInterval(() => { 
+            if (world.character.x > 5100) {
+                this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
+            }
+            if (world.character.x > 5120) {
+                this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
+            }
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT_ENDBOSS);
+                
+            }
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD_ENDBOSS);
+                this.speed = 0;
+            }
+        }, 140);
+    }  
 }

@@ -34,19 +34,20 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             this.x += 8; // Weite des Wurfes
         }, 25);
+        setTimeout(function(){ 
+            playAudio('audio/bottle-splash.mp3');
+        }, 800) 
     }
 
     animate() {
         setInterval(() => {
-            if (this.y > 250) {
+            if (this.y > 250 || this.endbossIsHurt) {
                 this.playAnimation(this.IMAGES_BOTTLES_SPLASH);
             } else {
                 this.playAnimation(this.IMAGES_BOTTLES_ROTATION);
             }
         }, 80);
     }
-    
-
 
 
 

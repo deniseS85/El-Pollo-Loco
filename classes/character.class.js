@@ -9,6 +9,7 @@ class Character extends MovableObject {
         right: 40,
         bottom: 30,
     };
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -17,6 +18,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/2_walk/W-25.png',
         'img/2_character_pepe/2_walk/W-26.png'
     ];
+
     IMAGES_JUMPING = [
         'img/2_character_pepe/3_jump/J-31.png',
         'img/2_character_pepe/3_jump/J-32.png',
@@ -28,6 +30,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-38.png',
         'img/2_character_pepe/3_jump/J-39.png'
     ];
+
     IMAGES_DEAD = [
         'img/2_character_pepe/5_dead/D-51.png',
         'img/2_character_pepe/5_dead/D-52.png',
@@ -38,11 +41,13 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-57.png'
 
     ];
+
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png'
     ];
+
     world; // zugreifen auf Variablen von world
     walk_sound = new Audio('audio/walk.mp3');
     jump_sound = new Audio('audio/jump.mp3');
@@ -93,7 +98,4 @@ class Character extends MovableObject {
             }
         }, 80);
     }
-
-    
-
 }

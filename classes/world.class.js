@@ -5,9 +5,12 @@ class World {
     ctx; //Sammlung an Funktionen von JS, um Objekte im Canvas hinzuzufügen
     keyboard;
     camera_x = 0;
+    endboss = new Endboss();
     statusBarLife = new StatusBarLife();
     statusBarBottle = new StatusBarBottle();
     statusBarCoin = new StatusBarCoin();
+    statusBarEndboss = new StatusBarEndboss();
+    statusBarEndbossIcon = new StatusBarEndbossIcon();
     throwableObjects = [];
     amountCollectBottles = 0;
 
@@ -26,15 +29,17 @@ class World {
 
     run() {
         setInterval(() => {
+            this.checkCollisionChicken();
             this.checkJumpOnChicken();
-            this.checkCollisionsChicken();
             this.checkThroughObject();
             this.checkCollectCoins();
             this.checkCollectBottles();
+            this.checkCollisionEndboss();
+            this.checkHitbyBottle();
         }, 100);
     }
 
-    checkCollisionsChicken() {
+    checkCollisionChicken() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isCollidingChicken(enemy)) {
                 this.character.hurt();
@@ -46,13 +51,22 @@ class World {
 
     checkJumpOnChicken() {
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isCollidingChicken(enemy) &&
-                this.character.isJumping() ) {
+            if (this.character.isCollidingChicken(enemy) && this.character.isJumping()) {
                 this.character.jump();
                 this.level.enemies.splice(i, 1);
                 playAudio('audio/chicken.wav');
             }
         });
+    }
+
+    checkThroughObject() {
+        if (this.keyboard.SPACE && this.amountCollectBottles > 0) {
+            let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
+            this.throwableObjects.push(bottle); 
+            this.character.reduceBottleByThrowing();
+            this.statusBarBottle.collectBottles(this.character.bottle);
+            this.amountCollectBottles--;
+        }
     }
 
     checkCollectCoins() {
@@ -78,16 +92,26 @@ class World {
         });
     }
 
-    checkThroughObject() {
-        if (this.keyboard.SPACE && this.amountCollectBottles > 0) {
-            let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
-            this.throwableObjects.push(bottle); 
-            this.character.reduceBottleByThrowing();
-            this.statusBarBottle.collectBottles(this.character.bottle);
-            this.amountCollectBottles--;
-        }
+    checkCollisionEndboss() {
+        if (this.character.isCollidingChicken(this.endboss)) {
+            this.character.hurt();
+            this.statusBarLife.reduceLife(this.character.energy);
+        }  
     }
 
+    checkHitbyBottle() {
+        this.throwableObjects.forEach((bottle, i) => {
+            if (this.endboss.isCollidingCollectables(bottle)) {
+                this.endboss.hurt(20); 
+                this.statusBarEndboss.reduceLife(this.endboss.energy);
+                bottle.endbossIsHurt = true;
+                setTimeout(() => {
+                    this.throwableObjects.splice(i, 1);
+                }, 300);
+                
+            }
+        }); 
+    }
     
     draw() {
         // Bild wird vor dem Neuladen gelöscht
@@ -101,12 +125,14 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
+        this.addToMap(this.endboss);
+        this.addToMap(this.statusBarEndboss);
+        this.addToMap(this.statusBarEndbossIcon);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarLife);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
         
-
         // Draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function() {

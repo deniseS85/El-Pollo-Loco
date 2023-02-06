@@ -13,6 +13,7 @@ class MovableObject extends DrawableObject{
         right: 0,
         bottom: 0,
     };
+   /*  endbossIsHurt = false; */
 
 
     // Lauf-Animation
@@ -123,5 +124,4 @@ class MovableObject extends DrawableObject{
         return this.energy == 0;
     }
 
-   
 }

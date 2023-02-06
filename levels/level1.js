@@ -16,8 +16,8 @@ function startLevel1() {
             new SmallChicken(),
             new SmallChicken(),
             new SmallChicken(),
-            new SmallChicken(),
-            new Endboss()
+            new SmallChicken()
+            /* new Endboss() */
         ],
         [
             new Cloud('img/5_background/layers/4_clouds/full.png', 0),
