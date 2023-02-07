@@ -64,18 +64,18 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (world.character.x > 4500) {
+            if (world.character.x > 4650) {
                 this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
                 this.move_left();
             }
         }, 800);
 
         setInterval(() => { 
-            if (world.character.x > 5000) { 
+            if (world.endboss.x - world.character.x <= 400 && !this.isHurt()) {  // Abstand zwischen Charakter und Endboss
                 this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
                 this.speed = 0.2;
             }
-            if (world.endboss.x - world.character.x < 500) { // Abstand zwischen Charakter und Endboss
+            if (world.endboss.x - world.character.x <= 350 && !this.isHurt()) { 
                 this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
                 this.speed = 0.2;
             }
@@ -83,7 +83,7 @@ class Endboss extends MovableObject {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_ENDBOSS);
                 this.speed = 0;
-               /*  playAudio('audio/endboss-scream.mp3');   */
+               /*  playAudio('audio/endboss-scream.mp3'); */
             } 
 
             if (this.isDead()) {
@@ -92,5 +92,6 @@ class Endboss extends MovableObject {
             }
         }, 120);
 
-    }  
+    } 
+
 }

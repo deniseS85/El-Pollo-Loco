@@ -81,6 +81,15 @@ class MovableObject extends DrawableObject{
         );
     }
 
+    killChicken() {
+        this.chickenEnergy -= 10;
+        if (this.chickenEnergy <= 0) {
+            this.chickenEnergy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
     isCollidingCollectables(moveObject) {
         return (
         this.x + this.width - this.offset.right > moveObject.x + moveObject.offset.left &&

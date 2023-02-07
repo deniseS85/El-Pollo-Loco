@@ -1,4 +1,5 @@
 class Chicken extends MovableObject {
+    chickenEnergy = 10;
     y = 355;
     width = 80;
     height = 80;
@@ -34,13 +35,18 @@ class Chicken extends MovableObject {
     animate() {
         this.move_left();
        
-     setInterval(() => {
-        this.playAnimation(this.IMAGES_CHICKEN);
-    }, 200); 
+        setInterval(() => {
+            if (this.chickenEnergy == 0) {
+                this.speed = 0;
+                this.loadImage(this.IMAGE_CHICKEN_DEAD);
+            } else {
+                this.playAnimation(this.IMAGES_CHICKEN);
+            }
+        }, 200); 
     
       
     }
 }
-    
+
 
 

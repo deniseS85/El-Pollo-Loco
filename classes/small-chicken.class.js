@@ -1,4 +1,5 @@
 class SmallChicken extends MovableObject {
+    chickenEnergy = 10;
     y = 380;
     width = 50;
     height = 50;
@@ -22,6 +23,7 @@ class SmallChicken extends MovableObject {
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_CHICKEN_SMALL);
+        this.loadImage(this.IMAGE_SMALL_CHICKEN_DEAD[0]);
         // Jedes Chicken ist an einer anderes Stelle an der x-Achse
         this.x = 400 + Math.random() * 5000;
         // Jedes Chicken hat eine andere Geschwindigkeit
@@ -33,9 +35,13 @@ class SmallChicken extends MovableObject {
         this.move_left();
 
         setInterval(() => {
-            // Lauf-Animation
-           this.playAnimation(this.IMAGES_CHICKEN_SMALL);
-        }, 200);
+            if (this.chickenEnergy == 0) {
+                this.speed = 0;
+                this.loadImage(this.IMAGE_SMALL_CHICKEN_DEAD);
+            } else {
+                this.playAnimation(this.IMAGES_CHICKEN_SMALL);
+            }
+        }, 200); 
     }
     
 }

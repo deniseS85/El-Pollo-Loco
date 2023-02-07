@@ -13,6 +13,7 @@ class World {
     statusBarEndbossIcon = new StatusBarEndbossIcon();
     throwableObjects = [];
     amountCollectBottles = 0;
+    
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -52,8 +53,11 @@ class World {
     checkJumpOnChicken() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingChicken(enemy) && this.character.isJumping()) {
+                enemy.killChicken();
                 this.character.jump();
-                this.level.enemies.splice(i, 1);
+                setTimeout(() => {
+                    this.level.enemies.splice(i, 1);
+                }, 900);
                 playAudio('audio/chicken.wav');
             }
         });
@@ -107,8 +111,7 @@ class World {
                 bottle.endbossIsHurt = true;
                 setTimeout(() => {
                     this.throwableObjects.splice(i, 1);
-                }, 300);
-                
+                }, 300);  
             }
         }); 
     }
@@ -126,12 +129,14 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.endboss);
-        this.addToMap(this.statusBarEndboss);
-        this.addToMap(this.statusBarEndbossIcon);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarLife);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
+        if (this.character.x > 4943) {
+            this.addToMap(this.statusBarEndboss);
+            this.addToMap(this.statusBarEndbossIcon);
+        }
         
         // Draw() wird immer wieder aufgerufen
         let self = this;
