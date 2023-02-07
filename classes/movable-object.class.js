@@ -13,8 +13,6 @@ class MovableObject extends DrawableObject{
         right: 0,
         bottom: 0,
     };
-   /*  endbossIsHurt = false; */
-
 
     // Lauf-Animation
     playAnimation(images) {
@@ -26,8 +24,14 @@ class MovableObject extends DrawableObject{
 
     // Objekte bewegen sich nach links (Wolken, Hühnchen)
     move_left() {
-        setInterval( () => {
+        setInterval(() => {
             this.x -= this.speed;
+        }, 1000 / 60);
+    }
+
+    move_right() {
+        setInterval(() => {
+            this.x += this.speed;
         }, 1000 / 60);
     }
 
@@ -76,7 +80,6 @@ class MovableObject extends DrawableObject{
         this.y < moveObject.y + moveObject.height
         );
     }
-
 
     isCollidingCollectables(moveObject) {
         return (

@@ -41,7 +41,7 @@ class World {
 
     checkCollisionChicken() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingChicken(enemy)) {
+            if (this.character.isCollidingChicken(enemy) && !this.character.isJumping()) {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
                 playAudio('audio/hurt.mp3');

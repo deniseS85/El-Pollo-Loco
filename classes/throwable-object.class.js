@@ -43,6 +43,7 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             if (this.y > 250 || this.endbossIsHurt) {
                 this.playAnimation(this.IMAGES_BOTTLES_SPLASH);
+                this.x += 5;
             } else {
                 this.playAnimation(this.IMAGES_BOTTLES_ROTATION);
             }
