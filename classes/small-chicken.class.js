@@ -4,7 +4,7 @@ class SmallChicken extends MovableObject {
     width = 50;
     height = 50;
     offset = {
-        top: 5,
+        top: 9,
         bottom: 10,
         left: 5,
         right: 5,

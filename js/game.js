@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let game_music = new Audio('audio/game-loop.mp3');
 let isMusic = false;
 
+
 function init() {
     canvas = document.getElementById('canvas');
     changeClasses();
@@ -44,11 +45,12 @@ function stopMusic() {
     }
 }
 
-function stopSound() {
-    this.soundEffects.forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-      });
+function stopSound(el) {
+    if (el.src.match('img/no-mute.png')) {
+        el.src = 'img/mute.png';
+    } else {
+        el.src = 'img/no-mute.png';
+    }
 }
 
 
@@ -88,3 +90,7 @@ window.addEventListener('keyup', (event) => {
         keyboard.DOWN = false;
     }
 });
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}

@@ -11,9 +11,10 @@ class World {
     statusBarCoin = new StatusBarCoin();
     statusBarEndboss = new StatusBarEndboss();
     statusBarEndbossIcon = new StatusBarEndbossIcon();
+    endScreen = new EndScreen();
     throwableObjects = [];
     amountCollectBottles = 0;
-    
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -23,9 +24,11 @@ class World {
         this.setWorld();
         this.run();
     }
+
     // damit Charakter auf Pfeiltasten reagieren kann
     setWorld() {
         this.character.world = this;
+        this.endScreen.world = this;
     }
 
     run() {
@@ -37,6 +40,7 @@ class World {
             this.checkCollectBottles();
             this.checkCollisionEndboss();
             this.checkHitbyBottle();
+            this.checkGameOver();
         }, 100);
     }
 
@@ -106,15 +110,27 @@ class World {
     checkHitbyBottle() {
         this.throwableObjects.forEach((bottle, i) => {
             if (this.endboss.isCollidingCollectables(bottle)) {
-                this.endboss.hurt(20); 
+                this.endboss.hurt();
                 this.statusBarEndboss.reduceLife(this.endboss.energy);
                 bottle.endbossIsHurt = true;
                 setTimeout(() => {
                     this.throwableObjects.splice(i, 1);
+                    playAudio('audio/endboss-scream.mp3');
                 }, 300);  
             }
         }); 
     }
+
+    checkGameOver() {
+        if(this.endScreen.deadEnemies) {
+            this.enemies = [];
+        }
+        if (this.endScreen.lost) {
+            this.character.isDead();
+        }
+    }
+
+
     
     draw() {
         // Bild wird vor dem Neuladen gelöscht
@@ -133,7 +149,8 @@ class World {
         this.addToMap(this.statusBarLife);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
-        if (this.character.x > 4943) {
+        this.addToMap(this.endScreen);
+        if (this.character.x > 4943 || this.endboss.x < 5400) {
             this.addToMap(this.statusBarEndboss);
             this.addToMap(this.statusBarEndbossIcon);
         }
@@ -145,7 +162,7 @@ class World {
         });
     }
 
-    // Arrays werden durchlaufen, damit alles zum Canvas hinzugefügt werden
+    // Arrays werden durchlaufen, damit alle Objekte zum Canvas hinzugefügt werden
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);

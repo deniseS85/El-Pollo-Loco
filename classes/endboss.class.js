@@ -73,17 +73,16 @@ class Endboss extends MovableObject {
         setInterval(() => { 
             if (world.endboss.x - world.character.x <= 400 && !this.isHurt()) {  // Abstand zwischen Charakter und Endboss
                 this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
-                this.speed = 0.2;
+                this.speed = 0.3;
             }
             if (world.endboss.x - world.character.x <= 350 && !this.isHurt()) { 
                 this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
-                this.speed = 0.2;
+                this.speed = 0.3;
             }
 
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT_ENDBOSS);
                 this.speed = 0;
-               /*  playAudio('audio/endboss-scream.mp3'); */
             } 
 
             if (this.isDead()) {

@@ -45,6 +45,11 @@ class MovableObject extends DrawableObject{
         },1000 / 25);
     }
 
+    // springen
+    jump() {
+        this.speedY = 30;
+    }
+
     // Wenn Objekt in der Luft ist
     isJumping() {
         if (this instanceof ThrowableObject) {
@@ -64,11 +69,6 @@ class MovableObject extends DrawableObject{
     walk_left() {
         this.x -= this.speed;
         this.otherDirection = true;
-    }
-
-    // springen
-    jump() {
-        this.speedY = 30;
     }
 
     // Berechnung Koordinaten für die Kollision der Objekte
