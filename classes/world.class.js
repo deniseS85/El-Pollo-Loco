@@ -15,7 +15,6 @@ class World {
     throwableObjects = [];
     amountCollectBottles = 0;
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -110,13 +109,11 @@ class World {
     checkHitbyBottle() {
         this.throwableObjects.forEach((bottle, i) => {
             if (this.endboss.isCollidingCollectables(bottle)) {
-                this.endboss.hurt();
                 this.statusBarEndboss.reduceLife(this.endboss.energy);
+                this.endboss.hurt();
                 bottle.endbossIsHurt = true;
-                setTimeout(() => {
-                    this.throwableObjects.splice(i, 1);
-                    playAudio('audio/endboss-scream.mp3');
-                }, 300);  
+                playAudio('audio/endboss-scream.mp3');
+                this.throwableObjects.splice(i, 1);
             }
         }); 
     }
@@ -130,38 +127,37 @@ class World {
         }
     }
 
-
     
     draw() {
-        // Bild wird vor dem Neuladen gelöscht
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this. camera_x, 0);
-        // Objekte werden hinzugefügt zum Canva
-        this.addObjectsToMap(this.level.background);
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addToMap(this.endboss);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBarLife);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottle);
-        this.addToMap(this.endScreen);
-        if (this.character.x > 4943 || this.endboss.x < 5400) {
-            this.addToMap(this.statusBarEndboss);
-            this.addToMap(this.statusBarEndbossIcon);
-        }
-        
-        // Draw() wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function() {
-            self.draw();
-        });
+            // Bild wird vor dem Neuladen gelöscht
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.translate(this. camera_x, 0);
+            // Objekte werden hinzugefügt zum Canva
+            this.addObjectsToMap(this.level.background);
+            this.addObjectsToMap(this.level.clouds);
+            this.addObjectsToMap(this.level.coins);
+            this.addObjectsToMap(this.level.bottles);
+            this.addToMap(this.character);
+            this.addObjectsToMap(this.level.enemies);
+            this.addObjectsToMap(this.throwableObjects);
+            this.addToMap(this.endboss);
+            this.ctx.translate(-this.camera_x, 0);
+            this.addToMap(this.statusBarLife);
+            this.addToMap(this.statusBarCoin);
+            this.addToMap(this.statusBarBottle);
+            this.addToMap(this.endScreen);
+            if (this.character.x > 4943 || this.endboss.x < 5400) {
+                this.addToMap(this.statusBarEndboss);
+                this.addToMap(this.statusBarEndbossIcon);
+            }
+            // Draw() wird immer wieder aufgerufen
+            let self = this;
+            requestAnimationFrame(function() {
+                self.draw();
+            });
     }
 
+    
     // Arrays werden durchlaufen, damit alle Objekte zum Canvas hinzugefügt werden
     addObjectsToMap(objects) {
         objects.forEach(o => {

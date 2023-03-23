@@ -38,35 +38,39 @@
     <div class="game-content">
         <div id="initPage" class="init-page"> <!-- d-none wieder rausnehmen -->
 
-            <img id="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
+            <img id="startImage" class="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
             <button class="start-btn" onclick="init(), playAudio('audio/klick-button.mp3')">Start</button>
-            <button class="control-btn" onclick="openPopUp()">Control</button>
+            <button class="control-btn" onclick="openPopUp(this)">Control</button>
 
-            <div id ="popUp" class="popUp d-none">
-                <div class="popUpLeft">
-                    <img src="img/arrow_right.png">
-                    <img src="img/arrow_left.png">
-                    <img src="img/arrow_up.png">
-                    <img src="img/space.png" style="width: 70px; height: 70px;">
+            <div id="popUp" class="popUp d-none">
+                <div class="control-content" onclick="doNotCloseOverlay(event)">
+                    <div class="popUpLeft">
+                        <img src="img/arrow_right.png">
+                        <img src="img/arrow_left.png">
+                        <img src="img/arrow_up.png">
+                        <img src="img/space.png" style="width: 80px; height: 40px;">
+                    </div>
+                    <div class="popUpRight">
+                        <div>Walk Right</div>
+                        <div>Walk Left</div>
+                        <div>Jump</div>
+                        <div>Throw Bottles</div>
+                    </div> 
                 </div>
-                <div class="popUpRight">
-                    <div>Walk Right</div>
-                    <div>Walk Left</div>
-                    <div>Jump</div>
-                    <div>Throw Bottles</div>
-                </div>   
+                <hr>
+                <div onclick="doNotCloseOverlay(event)" class="info">Defeat the boss, collect at least 10 bottles. Watch out for the chickens, kill them by jumping on them.</div>
             </div>
         </div>
         
         <div id="canvas-container" class="canvas-container d-none">
-            <canvas id="canvas" width="720" height="480"></canvas>
-            <img onclick="stopMusic()" class="music-off" src="img/music-off.png">
-            <img onclick="stopSound(this)" class="mute" src="img/no-mute.png">
-            <img onclick="openPopUp()" class="control" src="img/control.png">
+            <canvas id="canvas" class="canvas" width="720" height="480"></canvas>
+            <img onclick="stopMusic(this)" class="music-off" src="img/music-on.png">
+            <img onclick="stopSound(this)" class="mute" src="img/mute.png">
+            <img onclick="openPopUp(this)" class="control" src="img/control.png">
             <img onclick="fullscreen()" class="fullscreen" src="img/fullscreen.png">
         </div>
 
-        <img src="img/frame-bg.png" class="frame-bg"> <!-- d-none wieder raus -->
+        <img src="img/frame-bg.png" class="frame-bg" onclick="closePopUp(this)"> 
     </div>
 
    

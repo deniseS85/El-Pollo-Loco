@@ -43,7 +43,6 @@ class ThrowableObject extends MovableObject {
             if (this.y > 250 || this.endbossIsHurt) {
                 this.playAnimation(this.IMAGES_BOTTLES_SPLASH);
                 this.x += 5;
-                /* playAudio('audio/bottle-splash.mp3'); */
             } else {
                 this.playAnimation(this.IMAGES_BOTTLES_ROTATION);
             }
