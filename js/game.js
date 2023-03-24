@@ -17,6 +17,7 @@ function init() {
 
 }
 
+
 function playAudio(url) {
     if(!isSound) {
         let audio = new Audio(url);
@@ -75,6 +76,7 @@ function fullscreen() {
     canvas.requestFullscreen();
 }
 
+
 function stopMusic(el) {
     if (isMusic == true) {
         game_music.pause();
@@ -87,6 +89,7 @@ function stopMusic(el) {
     }
 }
 
+
 function stopSound(el) {
     if (el.src.match('img/no-mute.png')) {
         el.src = 'img/mute.png';
@@ -94,7 +97,6 @@ function stopSound(el) {
     } else {
         el.src = 'img/no-mute.png';
         isSound = true;
-
     }
 }
 
@@ -136,9 +138,12 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
+
 function touchPanel() {
     document.getElementById('left-touch').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) {
+            e.preventDefault();
+         }
         keyboard.LEFT = true;
     });
     document.getElementById('left-touch').addEventListener('touchend', (e) => {
@@ -146,7 +151,9 @@ function touchPanel() {
         keyboard.LEFT = false;
     });
     document.getElementById('right-touch').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) {
+            e.preventDefault();
+         }
         keyboard.RIGHT = true;
     });
     document.getElementById('right-touch').addEventListener('touchend', (e) => {
@@ -154,7 +161,9 @@ function touchPanel() {
         keyboard.RIGHT = false;
     });
     document.getElementById('jump-touch').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) {
+            e.preventDefault();
+         }
         keyboard.UP = true;
     });
     document.getElementById('jump-touch').addEventListener('touchend', (e) => {
@@ -162,7 +171,9 @@ function touchPanel() {
         keyboard.UP = false;
     });
     document.getElementById('throw-touch').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) {
+            e.preventDefault();
+         }
         keyboard.SPACE = true;
     });
     document.getElementById('throw-touch').addEventListener('touchend', (e) => {

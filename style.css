@@ -312,12 +312,7 @@ hr {
     }
     .popUp {
         width: 50%;
-    }
-    .popUpLeft img {
-        width: 17px;
-    }
-    #space {
-        width: 60px;
+        height: 57%;
     }
     button {
         height: 66px;
@@ -326,14 +321,19 @@ hr {
         font-size: 22px;
         line-height: 69px;
     }
+    #space {
+        width: 60px; 
+        height: 20px;
+    }
     .popUpRight div {
-        font-size: 17px;
+        font-size: 16px;
     }
     .info {
         font-size: 19px;
     }
     .control-content {
         height: unset;
+        margin-top: 0;
     }
     .control, .mute, .music-off {
         width: 38px;
@@ -344,10 +344,10 @@ hr {
     .touch-panel {
         display: flex;
         position: absolute;
-        bottom: 0;
+        bottom: 9px;
         justify-content: space-evenly;
         width: 100%;
-        margin-bottom: 5px;
+        z-index: 999;
     }
     .touch-panel img {
         width: 65px;
@@ -393,17 +393,24 @@ hr {
     .frame-bg {
         display: none;
     }
+    .control-content {
+        height: unset;
+        margin-top: 0;
+    }
     .popUp {
-        height: 60%;
+        width: 50%;
+        height: 57%;
+    }
+    .popUpRight div {
+        font-size: 16px;
+    }
+    .info {
+        font-size: 19px;
     }
     .popUpLeft img {
         height: 17px;
-        width: 17px;
+        width: 50px;
         object-fit: contain;
-    }
-
-    #space {
-        height: 25px;
     }
     button  {
         height: 66px;
@@ -414,6 +421,28 @@ hr {
     }
     .fullscreen {
         display: none;
+    }
+    .touch-panel {
+        display: flex;
+        position: absolute;
+        bottom: 9px;
+        justify-content: space-evenly;
+        width: 100%;
+        z-index: 999;
+    }
+    .touch-panel img {
+        width: 65px;
+        height: 31px;
+        object-fit: contain;
+        background: rgb(255, 150, 1);
+        border-radius: 19px;
+        padding-left: 13px;
+        padding-right: 13px;
+        border: 1px solid;
+        color: black;
+    }
+    .touch-panel img:active {
+        background-color: rgb(195, 129, 5);
     }
 }
     
