@@ -9,6 +9,9 @@ let isSound = false;
 
 function init() {
     canvas = document.getElementById('canvas');
+}
+
+function startGame() {
     changeClasses();
     world = new World(canvas, keyboard);
     game_music.play('audio/game-loop.mp3');

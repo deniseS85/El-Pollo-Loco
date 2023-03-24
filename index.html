@@ -33,7 +33,7 @@
    
     <title>El Pollo Loco</title>
 </head>
-<body>
+<body onload="init()">
     
     <div class="rotate-screen">
         <span class="rotate-text">Please rotate device</span>
@@ -43,7 +43,7 @@
         <div id="initPage" class="init-page"> 
 
             <img id="startImage" class="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
-            <button class="start-btn" onclick="init(), playAudio('audio/klick-button.mp3')">Start</button>
+            <button class="start-btn" onclick="startGame(), playAudio('audio/klick-button.mp3')">Start</button>
             <button class="control-btn" onclick="openPopUp(this)">Control</button>
 
             <div id="popUp" class="popUp d-none">
@@ -74,10 +74,14 @@
             <img onclick="fullscreen()" class="fullscreen" src="img/fullscreen.png">
 
             <div class="touch-panel">
-                <img id="left-touch" src="img/walk-left-touch.png">
-                <img id="right-touch" src="img/walk-right-touch.png">
-                <img id="jump-touch" src="img/jump-touch.png">
-                <img id="throw-touch" src="img/bottle-touch.png">
+                <div class="touch-left">
+                    <img id="left-touch" src="img/walk-left-touch.png">
+                    <img id="right-touch" src="img/walk-right-touch.png">
+                </div>
+                <div class="touch-right">
+                    <img id="jump-touch" src="img/jump-touch.png">
+                    <img id="throw-touch" src="img/bottle-touch.png">
+                </div>
             </div>
             <div class="popUp d-none">
                 <div class="control-content">

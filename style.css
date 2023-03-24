@@ -106,10 +106,12 @@ button:hover {
   
 .start-btn {
     left: 25%;
+    color:black;
 }
 
 .control-btn {
     right: 25%;
+    color: black;
 }
 
 canvas {
@@ -345,8 +347,9 @@ hr {
         display: flex;
         position: absolute;
         bottom: 9px;
-        justify-content: space-evenly;
-        width: 100%;
+        left: 10px;
+        right: 10px;
+        justify-content: space-between;
         z-index: 999;
     }
     .touch-panel img {
@@ -359,6 +362,7 @@ hr {
         padding-right: 13px;
         border: 1px solid;
         color: black;
+        margin-right: 10px;
     }
     .touch-panel img:active {
         background-color: rgb(195, 129, 5);
@@ -426,8 +430,9 @@ hr {
         display: flex;
         position: absolute;
         bottom: 9px;
-        justify-content: space-evenly;
-        width: 100%;
+        left: 10px;
+        right: 10px;
+        justify-content: space-between;
         z-index: 999;
     }
     .touch-panel img {
@@ -440,6 +445,7 @@ hr {
         padding-right: 13px;
         border: 1px solid;
         color: black;
+        margin-right: 10px;
     }
     .touch-panel img:active {
         background-color: rgb(195, 129, 5);
