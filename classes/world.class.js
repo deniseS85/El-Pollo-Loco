@@ -37,6 +37,7 @@ class World {
             this.checkThroughObject();
             this.checkCollectCoins();
             this.checkCollectBottles();
+            this.checkBottleKillChicken();
             this.checkCollisionEndboss();
             this.checkHitbyBottle();
         }, 100);
@@ -54,9 +55,9 @@ class World {
 
     checkJumpOnChicken() {
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isCollidingChicken(enemy) && this.character.isJumping()) {
-                enemy.killChicken();
+            if (this.character.isCollidingChicken(enemy) && this.character.isJumping() && this.character.speedY < 0) {
                 this.character.jump();
+                enemy.killChicken();
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 400);
@@ -64,6 +65,22 @@ class World {
             }
         });
     }
+////////////////////////////
+    checkBottleKillChicken() {
+        this.throwableObjects.forEach((bottle, i) => {
+            this.level.enemies.forEach((enemy, j) => {
+                if (bottle.isCollidingCollectables(enemy)) {
+                   enemy.killChicken();
+                   setTimeout(() => {
+                    this.level.enemies.splice(j, 1);
+                }, 100);
+                    playAudio('audio/chicken.wav');
+                    this.throwableObjects.splice(i, 1);
+                }
+            })
+        });
+    }
+////////////////////////////
 
     checkThroughObject() {
         if (this.keyboard.SPACE && this.amountCollectBottles > 0) {
@@ -98,6 +115,15 @@ class World {
         });
     }
 
+    /* this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                this.bottleCollected(bottle);
+                this.character.raiseProgressbarBottle();
+                this.statusBarBottle.setPercentage(this.character.progressBottleBar);
+                this.playSound(this.soundCollectBottle, 0.2);
+            }
+        }); */
+
     checkCollisionEndboss() {
         if (this.character.isCollidingChicken(this.endboss)) {
             this.character.hurt();
@@ -115,6 +141,7 @@ class World {
             }
         }); 
     }
+
 
     draw() {
             // Bild wird vor dem Neuladen gelöscht

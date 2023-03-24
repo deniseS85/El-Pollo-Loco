@@ -112,7 +112,6 @@ class Character extends MovableObject {
                     this.walk_sound.play();
                     this.snoring_sound.pause();
                 }
-                
             }
          
             if (this.world.keyboard.UP && !this.isJumping()) {
@@ -121,7 +120,6 @@ class Character extends MovableObject {
                     this.jump_sound.play();
                     this.snoring_sound.pause();
                 }
-               
             }
              // Kameraführung
             this.world.camera_x = -this.x + 100;
