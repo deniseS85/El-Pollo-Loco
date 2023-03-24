@@ -18,7 +18,6 @@
     <script src="js/game.js"></script>
     <script src="classes/world.class.js"></script>
     <script src="classes/movable-object.class.js"></script>
-    <script src="classes/endscreen.class.js"></script>
     <script src="classes/throwable-object.class.js"></script>
     <script src="classes/bottles.class.js"></script>
     <script src="classes/coins.class.js"></script>
@@ -30,11 +29,16 @@
     <script src="classes/endboss.class.js"></script>
     <script src="classes/level.class.js"></script>
     <script src="levels/level1.js"></script>
+    <script src="classes/endscreen.class.js"></script>
    
     <title>El Pollo Loco</title>
 </head>
 <body>
     
+    <div class="rotate-screen">
+        <span class="rotate-text">Please rotate device</span>
+    </div>
+
     <div class="game-content">
         <div id="initPage" class="init-page"> <!-- d-none wieder rausnehmen -->
 
@@ -48,7 +52,7 @@
                         <img src="img/arrow_right.png">
                         <img src="img/arrow_left.png">
                         <img src="img/arrow_up.png">
-                        <img src="img/space.png" style="width: 80px; height: 40px;">
+                        <img id="space" src="img/space.png">
                     </div>
                     <div class="popUpRight">
                         <div>Walk Right</div>
@@ -58,7 +62,7 @@
                     </div> 
                 </div>
                 <hr>
-                <div onclick="doNotCloseOverlay(event)" class="info">Defeat the boss, collect at least 10 bottles. Watch out for the chickens, kill them by jumping on them.</div>
+                <div onclick="doNotCloseOverlay(event)" class="info">Defeat the boss, collect at least 5 bottles. Watch out for the chickens, kill them by jumping on them.</div>
             </div>
         </div>
         
@@ -66,20 +70,37 @@
             <canvas id="canvas" class="canvas" width="720" height="480"></canvas>
             <img onclick="stopMusic(this)" class="music-off" src="img/music-on.png">
             <img onclick="stopSound(this)" class="mute" src="img/mute.png">
-            <img onclick="openPopUp(this)" class="control" src="img/control.png">
+            <img onclick="openPopUpGame(this)" class="control" src="img/control.png">
             <img onclick="fullscreen()" class="fullscreen" src="img/fullscreen.png">
+
+            <div class="touch-panel">
+                <img id="left-touch" src="img/walk-left-touch.png">
+                <img id="right-touch" src="img/walk-right-touch.png">
+                <img id="jump-touch" src="img/jump-touch.png">
+                <img id="throw-touch" src="img/bottle-touch.png">
+            </div>
+            <div class="popUp d-none">
+                <div class="control-content">
+                    <div class="popUpLeft">
+                        <img src="img/arrow_right.png">
+                        <img src="img/arrow_left.png">
+                        <img src="img/arrow_up.png">
+                        <img id="space "src="img/space.png">
+                    </div>
+                    <div class="popUpRight">
+                        <div>Walk Right</div>
+                        <div>Walk Left</div>
+                        <div>Jump</div>
+                        <div>Throw Bottles</div>
+                    </div> 
+                </div>
+                <hr>
+                <div class="info">Defeat the boss, collect at least 5 bottles. Watch out for the chickens, kill them by jumping on them.</div>
+            </div>
         </div>
 
         <img src="img/frame-bg.png" class="frame-bg" onclick="closePopUp(this)"> 
     </div>
-
-   
-   
-
-   
-   
-   
-   
 
 </body>
 </html>

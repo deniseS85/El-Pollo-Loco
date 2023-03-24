@@ -40,7 +40,7 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (this.y > 250 || this.endbossIsHurt) {
+            if (this.y > 250 || this.hurtEndboss()) {
                 this.playAnimation(this.IMAGES_BOTTLES_SPLASH);
                 this.x += 5;
             } else {

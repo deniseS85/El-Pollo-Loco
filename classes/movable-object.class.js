@@ -13,6 +13,7 @@ class MovableObject extends DrawableObject{
         right: 0,
         bottom: 0,
     };
+    
 
     // Lauf-Animation
     playAnimation(images) {
@@ -101,6 +102,15 @@ class MovableObject extends DrawableObject{
 
     hurt() {
         this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHurt = new Date().getTime();
+        }
+    }
+
+    hurtEndboss() {
+        this.energy -= 20;
         if (this.energy < 0) {
             this.energy = 0;
         } else {

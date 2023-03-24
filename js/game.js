@@ -13,6 +13,8 @@ function init() {
     world = new World(canvas, keyboard);
     game_music.play('audio/game-loop.mp3');
     isMusic = true;
+    touchPanel();
+
 }
 
 function playAudio(url) {
@@ -33,7 +35,6 @@ function changeClasses() {
 function openPopUp(el) {
     if (!isOpenPopUp) {
         el.closest('.game-content').querySelector('.popUp').classList.remove('d-none');
-        el.closest('.game-content').querySelector('.canvas').classList.add('overlay-bg');
         el.closest('.game-content').querySelector('.startImage').classList.add('overlay-bg');
         isOpenPopUp = true;
     } else {
@@ -48,6 +49,22 @@ function closePopUp(el) {
     isOpenPopUp = false;
 }
 
+
+function openPopUpGame(el) {
+    if (!isOpenPopUp) {
+        el.closest('.canvas-container').querySelector('.popUp').classList.remove('d-none');
+        el.closest('.canvas-container').querySelector('.canvas').classList.add('overlay-bg');
+        isOpenPopUp = true;
+    } else {
+        closePopUpGame(el);
+    }
+}
+
+function closePopUpGame(el) {
+    el.closest('.canvas-container').querySelector('.popUp').classList.add('d-none');
+    el.closest('.canvas-container').querySelector('.canvas').classList.remove('overlay-bg');
+    isOpenPopUp = false;
+}
 
 function doNotCloseOverlay(event) {
     event.stopPropagation();
@@ -118,6 +135,42 @@ window.addEventListener('keyup', (event) => {
         keyboard.DOWN = false;
     }
 });
+
+function touchPanel() {
+    document.getElementById('left-touch').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
+    document.getElementById('left-touch').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+    document.getElementById('right-touch').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+    document.getElementById('right-touch').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+    document.getElementById('jump-touch').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.UP = true;
+    });
+    document.getElementById('jump-touch').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.UP = false;
+    });
+    document.getElementById('throw-touch').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+    document.getElementById('throw-touch').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+}
+
 
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);

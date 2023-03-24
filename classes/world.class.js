@@ -39,7 +39,6 @@ class World {
             this.checkCollectBottles();
             this.checkCollisionEndboss();
             this.checkHitbyBottle();
-            this.checkGameOver();
         }, 100);
     }
 
@@ -60,7 +59,7 @@ class World {
                 this.character.jump();
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
-                }, 900);
+                }, 400);
                 playAudio('audio/chicken.wav');
             }
         });
@@ -109,25 +108,14 @@ class World {
     checkHitbyBottle() {
         this.throwableObjects.forEach((bottle, i) => {
             if (this.endboss.isCollidingCollectables(bottle)) {
+                this.endboss.hurtEndboss();
                 this.statusBarEndboss.reduceLife(this.endboss.energy);
-                this.endboss.hurt();
-                bottle.endbossIsHurt = true;
                 playAudio('audio/endboss-scream.mp3');
                 this.throwableObjects.splice(i, 1);
             }
         }); 
     }
 
-    checkGameOver() {
-        if(this.endScreen.deadEnemies) {
-            this.enemies = [];
-        }
-        if (this.endScreen.lost) {
-            this.character.isDead();
-        }
-    }
-
-    
     draw() {
             // Bild wird vor dem Neuladen gelöscht
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
