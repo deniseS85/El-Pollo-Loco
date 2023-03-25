@@ -36,7 +36,7 @@ class EndScreen extends MovableObject {
             this.deadEnemies = true;   
             this.game_over_audio.play();
             game_music.pause();
-            clearAllIntervals();
+            stopGame();
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 3400);
@@ -50,7 +50,7 @@ class EndScreen extends MovableObject {
             this.lost = true;     
             this.game_lost_audio.play();
             game_music.pause();
-            clearAllIntervals();
+            stopGame();
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 3400);

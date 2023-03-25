@@ -34,15 +34,16 @@ class World {
         setInterval(() => {
             this.checkCollisionChicken();
             this.checkJumpOnChicken();
+            this.checkBottleKillChicken();
             this.checkThroughObject();
             this.checkCollectCoins();
             this.checkCollectBottles();
-            this.checkBottleKillChicken();
             this.checkCollisionEndboss();
             this.checkHitbyBottle();
         }, 100);
     }
 
+    
     checkCollisionChicken() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isCollidingChicken(enemy) && !this.character.isJumping()) {
@@ -53,11 +54,12 @@ class World {
         });
     }
 
+
     checkJumpOnChicken() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingChicken(enemy) && this.character.isJumping() && this.character.speedY < 0) {
-                this.character.jump();
                 enemy.killChicken();
+                this.character.jump();
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 400);
@@ -65,22 +67,23 @@ class World {
             }
         });
     }
-////////////////////////////
+
+
     checkBottleKillChicken() {
-        this.throwableObjects.forEach((bottle, i) => {
-            this.level.enemies.forEach((enemy, j) => {
-                if (bottle.isCollidingCollectables(enemy)) {
+        this.level.enemies.forEach((enemy, i) => {
+            this.throwableObjects.forEach((bottle, j) => {
+                if (bottle.isCollidingChicken(enemy)) {
                    enemy.killChicken();
                    setTimeout(() => {
-                    this.level.enemies.splice(j, 1);
-                }, 100);
+                    this.level.enemies.splice(i, 1);
+                }, 400);
+                    this.throwableObjects.splice(j, 1);
                     playAudio('audio/chicken.wav');
-                    this.throwableObjects.splice(i, 1);
                 }
             })
         });
     }
-////////////////////////////
+
 
     checkThroughObject() {
         if (this.keyboard.SPACE && this.amountCollectBottles > 0) {
@@ -92,6 +95,7 @@ class World {
         }
     }
 
+
     checkCollectCoins() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isCollidingCollectables(coin)) {
@@ -102,6 +106,7 @@ class World {
             }
         });
     }
+
 
     checkCollectBottles() {
         this.level.bottles.forEach((bottle, i) => {
@@ -115,21 +120,14 @@ class World {
         });
     }
 
-    /* this.level.bottles.forEach((bottle) => {
-            if (this.character.isColliding(bottle)) {
-                this.bottleCollected(bottle);
-                this.character.raiseProgressbarBottle();
-                this.statusBarBottle.setPercentage(this.character.progressBottleBar);
-                this.playSound(this.soundCollectBottle, 0.2);
-            }
-        }); */
-
+    
     checkCollisionEndboss() {
         if (this.character.isCollidingChicken(this.endboss)) {
             this.character.hurt();
             this.statusBarLife.reduceLife(this.character.energy);
         }  
     }
+
 
     checkHitbyBottle() {
         this.throwableObjects.forEach((bottle, i) => {
@@ -144,32 +142,32 @@ class World {
 
 
     draw() {
-            // Bild wird vor dem Neuladen gelöscht
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.ctx.translate(this. camera_x, 0);
-            // Objekte werden hinzugefügt zum Canva
-            this.addObjectsToMap(this.level.background);
-            this.addObjectsToMap(this.level.clouds);
-            this.addObjectsToMap(this.level.coins);
-            this.addObjectsToMap(this.level.bottles);
-            this.addToMap(this.character);
-            this.addObjectsToMap(this.level.enemies);
-            this.addObjectsToMap(this.throwableObjects);
-            this.addToMap(this.endboss);
-            this.ctx.translate(-this.camera_x, 0);
-            this.addToMap(this.statusBarLife);
-            this.addToMap(this.statusBarCoin);
-            this.addToMap(this.statusBarBottle);
-            this.addToMap(this.endScreen);
-            if (this.character.x > 4943 || this.endboss.x < 5400) {
-                this.addToMap(this.statusBarEndboss);
-                this.addToMap(this.statusBarEndbossIcon);
-            }
-            // Draw() wird immer wieder aufgerufen
-            let self = this;
-            requestAnimationFrame(function() {
-                self.draw();
-            });
+        // Bild wird vor dem Neuladen gelöscht
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this. camera_x, 0);
+        // Objekte werden hinzugefügt zum Canva
+        this.addObjectsToMap(this.level.background);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addToMap(this.endboss);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBarLife);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        this.addToMap(this.endScreen);
+        if (this.character.x > 4943 || this.endboss.x < 5400) {
+            this.addToMap(this.statusBarEndboss);
+            this.addToMap(this.statusBarEndbossIcon);
+        }
+        // Draw() wird immer wieder aufgerufen
+        let self = this;
+        requestAnimationFrame(function() {
+            self.draw();
+        });
     }
 
     
@@ -179,6 +177,7 @@ class World {
             this.addToMap(o);
         });
     }
+
 
     addToMap(moveObject) {
          // Spiegelung vom Charakter
@@ -198,6 +197,7 @@ class World {
         }
     }
 
+
     // Spiegelung des Charakters
     flipImage(moveObject) {
         this.ctx.save(); // Eigenschaften vom Canvas werden gespeichert (wie Screenshot)
@@ -205,6 +205,7 @@ class World {
         this.ctx.scale(-1, 1); //Spiegelung um die eigene Achse --> (-1/1)
         moveObject.x = moveObject.x * -1; // x-Achse wird gespiegelt
     }
+
 
     flipImageBack(moveObject) {
         moveObject.x = moveObject.x * -1; // x-Achse wird wieder ungespiegelt

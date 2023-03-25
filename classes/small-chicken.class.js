@@ -33,15 +33,17 @@ class SmallChicken extends MovableObject {
 
     animate() {
         this.move_left();
+        setStoppableInterval(() => this.littleChickenAnimation(), 200);
+    }
 
-        setInterval(() => {
-            if (this.chickenEnergy == 0) {
-                this.speed = 0;
-                this.loadImage(this.IMAGE_SMALL_CHICKEN_DEAD);
-            } else {
-                this.playAnimation(this.IMAGES_CHICKEN_SMALL);
-            }
-        }, 200); 
+
+    littleChickenAnimation() {
+        if (this.chickenEnergy == 0) {
+            this.speed = 0;
+            this.loadImage(this.IMAGE_SMALL_CHICKEN_DEAD);
+        } else {
+            this.playAnimation(this.IMAGES_CHICKEN_SMALL);
+        }
     }
     
 }

@@ -5,11 +5,21 @@ let game_music = new Audio('audio/game-loop.mp3');
 let isMusic = false;
 let isOpenPopUp = false;
 let isSound = false;
+let isPaused = false;
+let intervalIds = [];
 
 
 function init() {
     canvas = document.getElementById('canvas');
+    /* awaitLoadingImages(); */
 }
+/* 
+async function awaitLoadingImages() {
+    showLoadingScreen();
+    await loadAllImagesToCache();
+    hideLoadingScreen();
+} */
+
 
 function startGame() {
     changeClasses();
@@ -17,7 +27,58 @@ function startGame() {
     game_music.play('audio/game-loop.mp3');
     isMusic = true;
     touchPanel();
+}
 
+
+function pauseGame() {
+    stopGame();
+    /* showPauseScreen();
+    showVolumeBtn();
+    showFullscreenBtn(); */
+}
+
+
+function stopGame() {
+    intervalIds.forEach(clearInterval);
+    isPaused = true;
+    
+  /*    stopMusic(el);
+     stopSound(el);
+       */
+}
+
+function unPauseGame() {
+   /*  hidePauseScreen();
+    continueGame();
+    hideVolumeBtn();
+    hideFullscreenBtn(); */
+}
+
+
+function continueGame() {
+    /* if (isPaused) {
+        reActivateAnimations();
+        isPaused = false;
+        if (!isMusic) {
+            startMusic();
+        }
+    } */
+}
+
+
+
+
+function reActivateAnimations() {
+   /*  world.throwableObjects.forEach(obj => { obj.throw() });
+    world.level.enemies.forEach(enemy => { enemy.animate() });
+    world.level.clouds.forEach(cloud => { cloud.animate() });
+    world.character.animate(); */
+}
+
+
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
 }
 
 
@@ -27,6 +88,7 @@ function playAudio(url) {
         audio.play();
     }
 }
+
 
 function changeClasses() {
     document.getElementById('initPage').style.display = 'none';
@@ -46,6 +108,7 @@ function openPopUp(el) {
     }
 }
 
+
 function closePopUp(el) {
     el.closest('.game-content').querySelector('.popUp').classList.add('d-none');
     el.closest('.game-content').querySelector('.canvas').classList.remove('overlay-bg');
@@ -64,16 +127,19 @@ function openPopUpGame(el) {
     }
 }
 
+
 function closePopUpGame(el) {
     el.closest('.canvas-container').querySelector('.popUp').classList.add('d-none');
     el.closest('.canvas-container').querySelector('.canvas').classList.remove('overlay-bg');
     isOpenPopUp = false;
 }
 
+
 function doNotCloseOverlay(event) {
     event.stopPropagation();
     console.log('content');
 }
+
 
 function fullscreen() {
     canvas.requestFullscreen();
@@ -185,7 +251,3 @@ function touchPanel() {
     });
 }
 
-
-function clearAllIntervals() {
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
-}

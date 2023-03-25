@@ -4,7 +4,7 @@ class Chicken extends MovableObject {
     width = 80;
     height = 80;
     offset = {
-        top: 20,
+        top: 5,
         bottom: 30,
         left: 20,
         right: 20
@@ -29,20 +29,23 @@ class Chicken extends MovableObject {
         // Jedes Chicken hat eine andere Geschwindigkeit
         this.speed = 0.2 + Math.random() * 0.5;
         this.animate();
+       
     }
 
 
     animate() {
         this.move_left();
+        setStoppableInterval(() => this.chickenAnimation(), 200);
+    }
+
+    chickenAnimation() {
        
-        setInterval(() => {
-            if (this.chickenEnergy == 0) {
-                this.speed = 0;
-                this.loadImage(this.IMAGE_CHICKEN_DEAD);
-            } else {
-                this.playAnimation(this.IMAGES_CHICKEN);
-            }
-        }, 200); 
+        if (this.chickenEnergy == 0) {
+            this.speed = 0;
+            this.loadImage(this.IMAGE_CHICKEN_DEAD);
+        } else {
+            this.playAnimation(this.IMAGES_CHICKEN);
+        }
     }
 }
 

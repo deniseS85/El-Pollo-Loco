@@ -31,7 +31,7 @@ class ThrowableObject extends MovableObject {
         this.speedY = 30; // Höhe des Wurfes
         this.gravity();
         setInterval(() => {
-            this.x += 8; // Weite des Wurfes
+            this.x += 7; // Weite des Wurfes
         }, 25);
         setTimeout(function(){ 
             playAudio('audio/bottle-splash.mp3');

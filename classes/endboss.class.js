@@ -63,34 +63,37 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
-            if (world.character.x > 4650) {
-                this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
-                this.move_left();
-            }
-        }, 800);
-
-        setInterval(() => { 
-            if (world.endboss.x - world.character.x <= 400 && !this.isHurt()) {  // Abstand zwischen Charakter und Endboss
-                this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
-                this.speed = 0.3;
-            }
-            if (world.endboss.x - world.character.x <= 350 && !this.isHurt()) { 
-                this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
-                this.speed = 0.3;
-            }
-
-            if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_ENDBOSS);
-                this.speed = 0;
-            } 
-
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD_ENDBOSS);
-                this.speed = 0;
-            }
-        }, 120);
-
+        setStoppableInterval(() => this.moveEndboss(), 800);
+        setStoppableInterval(() => this.playEndboss(), 120);
     } 
+
+    moveEndboss() {
+        if (world.character.x > 4650) {
+            this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
+            this.move_left();
+        }
+    }
+
+
+    playEndboss() {
+        if (world.endboss.x - world.character.x <= 400 && !this.isHurt()) {  // Abstand zwischen Charakter und Endboss
+            this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
+            this.speed = 0.3;
+        }
+        if (world.endboss.x - world.character.x <= 350 && !this.isHurt()) { 
+            this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
+            this.speed = 0.3;
+        }
+
+        if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT_ENDBOSS);
+            this.speed = 0;
+        } 
+
+        if (this.isDead()) {
+            this.playAnimation(this.IMAGES_DEAD_ENDBOSS);
+            this.speed = 0;
+        }
+    }
 
 }

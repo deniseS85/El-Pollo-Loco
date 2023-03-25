@@ -12,9 +12,5 @@ class Cloud extends MovableObject {
     // Wolken bewegen sich jede 60 frame per second(FPS) 0.2px abzgl. von x
     animate() {
         this.move_left();
-    }
-
-    
-
-    
+    }  
 }

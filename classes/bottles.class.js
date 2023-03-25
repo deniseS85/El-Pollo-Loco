@@ -4,8 +4,8 @@ class Bottles extends MovableObject {
     offset = {
         top: 0,
         bottom: 0,
-        left: 30,
-        right: 30
+        left: 20,
+        right: 20
     }
 
     constructor(imagePath, x, y) {

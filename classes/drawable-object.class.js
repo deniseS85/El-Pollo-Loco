@@ -1,12 +1,12 @@
 class DrawableObject {
     img;
-    imageCache = {}; // Json für die Bilder vom Character
+    imageCache = {}; // Json für die alle Bilder
     currentImage = 0;
     x = 120;
     y = 280;
     height = 150;
     width = 100;
-
+   
 
     // Welt zeichnen mit Koordinaten, Breite und Höhe
     draw(ctx) {
@@ -38,5 +38,8 @@ class DrawableObject {
             img.src = path;
             this.imageCache[path] = img;
         });
+        
     }
+
 }
+
