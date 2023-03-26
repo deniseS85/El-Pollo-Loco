@@ -6,7 +6,8 @@ class DrawableObject {
     y = 280;
     height = 150;
     width = 100;
-   
+  
+
 
     // Welt zeichnen mit Koordinaten, Breite und Höhe
     draw(ctx) {
@@ -37,11 +38,11 @@ class DrawableObject {
             let img = new Image();
             img.src = path;
             this.imageCache[path] = img;
+            totalImageCache[path] = this.imageCache[path];
         });
-        
-    }
+    } 
 
-   /*  loadImage(path) {
+     /*  loadImage(path) {
         this.img = totalImageCache[path];
     }
 
@@ -51,6 +52,5 @@ class DrawableObject {
             this.imageCache[path] = totalImageCache[path];
         });
     } */
-
 }
 

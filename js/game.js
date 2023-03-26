@@ -12,19 +12,14 @@ let walk_sound = new Audio('audio/walk.mp3');
 let jump_sound = new Audio('audio/jump.mp3');
 
 
+
 function init() {
     canvas = document.getElementById('canvas');
-    /* awaitLoadingImages(); */
 }
-/* 
-async function awaitLoadingImages() {
-    showLoadingScreen();
-    await loadAllImagesToCache();
-    hideLoadingScreen();
-} */
 
 
 function startGame() {
+    awaitLoadingImages();
     changeClasses();
     world = new World(canvas, keyboard);
     game_music.play('audio/game-loop.mp3');
@@ -32,20 +27,34 @@ function startGame() {
     touchPanel();
 }
 
+
+async function awaitLoadingImages() {
+    showLoadingScreen();
+    await loadAllImagesToCache();
+    hideLoadingScreen();
+}
+
+
 function showLoadingScreen() {
     document.getElementById('loader').classList.remove('d-none');
 }
+
 
 function hideLoadingScreen() {
     document.getElementById('loader').classList.add('d-none');
 }
 
 
-function pauseAndContinueGame() {
+function pauseAndContinueGame(el) {
     if (!isPaused && world) {
        pause();
     } else if (isPaused) {
        noPause();
+    }
+    if (el.src.match('img/play.png')) {
+        el.src = 'img/pause.png';
+    } else {
+        el.src = 'img/play.png';
     }
 }
 
@@ -160,12 +169,6 @@ function closePopUpGame(el) {
     noPause();
     el.closest('.canvas-container').querySelector('.popUp').classList.add('d-none');
     isOpenPopUp = false;
-}
-
-
-function doNotCloseOverlay(event) {
-    event.stopPropagation();
-    console.log('content');
 }
 
 

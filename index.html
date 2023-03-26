@@ -15,9 +15,9 @@
     <script src="classes/status-bar-life-endboss.class.js"></script>
     <script src="classes/status-bar-endboss-icon.class.js"></script>
     <script src="classes/keyboard.class.js"></script>
+    <script src="js/imageCacheData.js"></script>
+    <script src="js/imageCache.js"></script>
     <script src="js/game.js"></script>
-   <!--  <script src="js/imageCache.js"></script>
-    <script src="js/imageCacheData.js"></script> -->
     <script src="classes/world.class.js"></script>
     <script src="classes/movable-object.class.js"></script>
     <script src="classes/throwable-object.class.js"></script>
@@ -51,27 +51,31 @@
             <button class="control-btn" onclick="openPopUp(this)">Control</button>
 
             <div id="popUp" class="popUp d-none">
-                <div class="control-content" onclick="doNotCloseOverlay(event)">
+                <div class="control-content">
                     <div class="popUpLeft">
                         <img src="img/arrow_right.png">
                         <img src="img/arrow_left.png">
                         <img src="img/arrow_up.png">
                         <img id="space" src="img/space.png">
+                        <span>F</span>
                     </div>
                     <div class="popUpRight">
                         <div>Walk Right</div>
                         <div>Walk Left</div>
                         <div>Jump</div>
                         <div>Throw Bottles</div>
+                        <div>Pause/Play</div>
                     </div> 
                 </div>
                 <hr>
-                <div onclick="doNotCloseOverlay(event)" class="info">Defeat the boss, collect at least 5 bottles. Watch out for the chickens, kill them by jumping on them.</div>
+                <div class="info">Defeat the boss, collect at least 5 bottles. Watch out for the chickens, kill them by jumping on them.</div>
             </div>
         </div>
         
         <div id="canvas-container" class="canvas-container d-none">
             <canvas id="canvas" class="canvas" width="720" height="480"></canvas>
+            <img onclick="window.location.href ='index.html'" class="home" src="img/home.png">
+            <img onclick="pauseAndContinueGame(this)" class="play-pause" src="img/play.png">
             <img onclick="stopMusic(this)" class="music-off" src="img/music-on.png">
             <img onclick="stopSound(this)" class="mute" src="img/no-mute.png">
             <img onclick="openPopUpGame(this)" class="control" src="img/control.png">
@@ -93,13 +97,15 @@
                         <img src="img/arrow_right.png">
                         <img src="img/arrow_left.png">
                         <img src="img/arrow_up.png">
-                        <img id="space "src="img/space.png">
+                        <img id="space-game"src="img/space.png">
+                        <span>F</span>
                     </div>
                     <div class="popUpRight">
                         <div>Walk Right</div>
                         <div>Walk Left</div>
                         <div>Jump</div>
                         <div>Throw Bottles</div>
+                        <div>Pause/Play</div>
                     </div> 
                 </div>
                 <hr>
@@ -107,7 +113,7 @@
             </div>
         </div>
 
-        <img src="img/frame-bg.png" class="frame-bg" onclick="closePopUp(this)"> 
+        <img src="img/frame-bg.png" class="frame-bg"> 
     </div>
 
 </body>

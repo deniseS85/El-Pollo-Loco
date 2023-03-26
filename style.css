@@ -126,8 +126,8 @@ canvas {
     left: 0;
     right: 0;
     bottom: 0;
-    width: 425px;
-    height: 290px;
+    width: 454px;
+    height: 315px;
     margin: auto;
     padding: 10px;
     background-color: rgb(255, 150, 1);
@@ -139,7 +139,8 @@ canvas {
     display: flex;
     justify-content: space-evenly;
     height: 177px;
-    margin-top: 8px;
+    margin-top: 18px;
+    margin-bottom: 18px;
 }
 .popUpLeft, .popUpRight {
     display: flex;
@@ -160,6 +161,11 @@ canvas {
     width: 25px;
     height: 25px;
     margin: 7px 50px 7px 0;
+}
+
+.popUpLeft span {
+    font-size: 23px;
+    margin: 0px 50px 7px 0;
 }
 
 hr {
@@ -227,6 +233,32 @@ hr {
     z-index: 10;
 }
 
+.home {
+    position: absolute;
+    width: 33px;
+    cursor: pointer;
+    z-index: 10;
+    top: 15px;
+    right: 275px;
+}
+
+.home:hover {
+    transform: scale(1.1); 
+}
+
+.play-pause {
+    width: 40px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    top: 13px;
+    right: 215px;
+}
+
+.play-pause:hover {
+    transform: scale(1.1); 
+}
+
 .music-off {
     top: 10px;
     right: 150px;
@@ -258,6 +290,12 @@ hr {
     width: 80px; 
     height: 40px;
 }
+
+#space-game {
+    width: 80px;
+    height: 40px;
+}
+
 
 .rotate-screen {
     width: 100%;
@@ -345,6 +383,10 @@ hr {
     }
     #space {
         width: 60px; 
+        height: 20px;
+    }
+    #space-game {
+        width: 40px;
         height: 20px;
     }
     .popUpRight div {
@@ -469,6 +511,14 @@ hr {
     }
     .touch-panel img:active {
         background-color: rgb(195, 129, 5);
+    }
+    #space {
+        width: 60px; 
+        height: 20px;
+    }
+    #space-game {
+        width: 40px;
+        height: 20px;
     }
 }
     

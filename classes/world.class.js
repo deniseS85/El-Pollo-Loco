@@ -96,6 +96,7 @@ class World {
             let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
             this.throwableObjects.push(bottle); 
             this.character.reduceBottleByThrowing();
+            snoring_sound.pause();
             this.statusBarBottle.collectBottles(this.character.bottle);
             this.amountCollectBottles--;
         }
