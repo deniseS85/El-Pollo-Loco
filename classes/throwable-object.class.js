@@ -25,17 +25,22 @@ class ThrowableObject extends MovableObject {
         this.width = 70;
         this.animate();
         this.throw();
+        this.throwBottle();
     }
 
     throw() {
         this.speedY = 30; // Höhe des Wurfes
         this.gravity();
-        setInterval(() => {
-            this.x += 7; // Weite des Wurfes
-        }, 25);
+        setStoppableInterval(() => this.throwBottle(), 25);
         setTimeout(function(){ 
-            playAudio('audio/bottle-splash.mp3');
+            if(!isPaused) {
+                playAudio('audio/bottle-splash.mp3');
+            }
         }, 800) 
+    }
+
+    throwBottle() {
+        this.x += 7; // Weite des Wurfes
     }
 
     animate() {
@@ -47,7 +52,9 @@ class ThrowableObject extends MovableObject {
                 this.playAnimation(this.IMAGES_BOTTLES_ROTATION);
             }
         }, 80);
+
     }
+    
 
 
 

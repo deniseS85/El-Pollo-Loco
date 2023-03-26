@@ -32,7 +32,7 @@ class SmallChicken extends MovableObject {
     }
 
     animate() {
-        this.move_left();
+        setStoppableInterval(() => this.move_left(), 1000 / 60);
         setStoppableInterval(() => this.littleChickenAnimation(), 200);
     }
 

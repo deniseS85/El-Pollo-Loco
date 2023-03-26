@@ -71,6 +71,7 @@ class Endboss extends MovableObject {
         if (world.character.x > 4650) {
             this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
             this.move_left();
+            
         }
     }
 
@@ -95,5 +96,6 @@ class Endboss extends MovableObject {
             this.speed = 0;
         }
     }
+
 
 }

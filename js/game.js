@@ -30,49 +30,54 @@ function startGame() {
 }
 
 
-function pauseGame() {
+function pauseAndContinueGame() {
+    if (!isPaused && world) {
+       pause();
+    } else if (isPaused) {
+       noPause();
+    }
+}
+
+function pause() {
     stopGame();
-    /* showPauseScreen();
-    showVolumeBtn();
-    showFullscreenBtn(); */
+    showPauseScreen();
+}
+
+
+function noPause() {
+    closePauseScreen();
+    continueGame();
 }
 
 
 function stopGame() {
     intervalIds.forEach(clearInterval);
+    game_music.pause();
+    // schnarchen off
     isPaused = true;
     
-  /*    stopMusic(el);
-     stopSound(el);
-       */
-}
-
-function unPauseGame() {
-   /*  hidePauseScreen();
-    continueGame();
-    hideVolumeBtn();
-    hideFullscreenBtn(); */
 }
 
 
 function continueGame() {
-    /* if (isPaused) {
+    if (isPaused) {
         reActivateAnimations();
         isPaused = false;
-        if (!isMusic) {
-            startMusic();
-        }
-    } */
+        //schnarchen on
+        if(isMusic) {
+            game_music.play();
+        }  
+    }
 }
 
 
-
-
 function reActivateAnimations() {
-   /*  world.throwableObjects.forEach(obj => { obj.throw() });
     world.level.enemies.forEach(enemy => { enemy.animate() });
     world.level.clouds.forEach(cloud => { cloud.animate() });
-    world.character.animate(); */
+    world.level.coins.forEach(coin => { coin.animate() });
+    world.throwableObjects.forEach(obj => { obj.throwBottle() });
+    world.endboss.animate();
+    world.character.animate();
 }
 
 
@@ -98,6 +103,16 @@ function changeClasses() {
 }
 
 
+function showPauseScreen() {
+    document.getElementById('canvas').classList.add('overlay-bg');
+}
+
+
+function closePauseScreen() {
+    document.getElementById('canvas').classList.remove('overlay-bg');
+}
+
+
 function openPopUp(el) {
     if (!isOpenPopUp) {
         el.closest('.game-content').querySelector('.popUp').classList.remove('d-none');
@@ -119,8 +134,8 @@ function closePopUp(el) {
 
 function openPopUpGame(el) {
     if (!isOpenPopUp) {
+        pause();
         el.closest('.canvas-container').querySelector('.popUp').classList.remove('d-none');
-        el.closest('.canvas-container').querySelector('.canvas').classList.add('overlay-bg');
         isOpenPopUp = true;
     } else {
         closePopUpGame(el);
@@ -129,8 +144,8 @@ function openPopUpGame(el) {
 
 
 function closePopUpGame(el) {
+    noPause();
     el.closest('.canvas-container').querySelector('.popUp').classList.add('d-none');
-    el.closest('.canvas-container').querySelector('.canvas').classList.remove('overlay-bg');
     isOpenPopUp = false;
 }
 
@@ -150,7 +165,7 @@ function stopMusic(el) {
     if (isMusic == true) {
         game_music.pause();
         el.src = 'img/music-off.png';
-        isMusic = false
+        isMusic = false;
     } else {
         game_music.play();
         el.src = 'img/music-on.png';
@@ -160,18 +175,20 @@ function stopMusic(el) {
 
 
 function stopSound(el) {
-    if (el.src.match('img/no-mute.png')) {
-        el.src = 'img/mute.png';
+    if (el.src.match('img/mute.png')) {
+        el.src = 'img/no-mute.png';
+        isPaused = false;
         isSound = false;
     } else {
-        el.src = 'img/no-mute.png';
+        el.src = 'img/mute.png';
+        isPaused = true;
         isSound = true;
     }
 }
 
 
 window.addEventListener('keydown', (event) => {
-    if(event.key == " ") {
+    if(event.key == " " && !isPaused) {
         keyboard.SPACE = true;
     }
     if(event.key == "ArrowLeft") {
@@ -186,11 +203,14 @@ window.addEventListener('keydown', (event) => {
     if(event.key == "ArrowDown") {
         keyboard.DOWN = true;
     }
+    if(event.key == "f") {
+        pauseAndContinueGame();
+    }
 });
 
 
 window.addEventListener('keyup', (event) => {
-    if(event.key == " ") {
+    if(event.key == " " && !isPaused) {
         keyboard.SPACE = false;
     }
     if(event.key == "ArrowLeft") {

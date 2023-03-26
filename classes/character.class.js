@@ -106,7 +106,7 @@ class Character extends MovableObject {
            this.walk_right();
            if(!isSound) {
                 this.walk_sound.play();
-                this.snoring_sound.pause();
+                this.snoring_sound.pause();    
            }
         }
 
@@ -156,7 +156,7 @@ class Character extends MovableObject {
         if (this.idleTimer >= 7000 && !this.isDead()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
             if(!isSound) {
-                this.snoring_sound.play();
+                this.snoring_sound.play().volume = 0.1;
             } else {
                 this.snoring_sound.pause();
             }

@@ -49,7 +49,9 @@ class World {
             if (this.character.isCollidingChicken(enemy) && !this.character.isJumping()) {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
-                playAudio('audio/hurt.mp3');
+                if(!isPaused) {
+                    playAudio('audio/hurt.mp3');
+                }
             }
         });
     }
@@ -63,7 +65,9 @@ class World {
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 400);
-                playAudio('audio/chicken.wav');
+                if(!isPaused) {
+                    playAudio('audio/chicken.wav');
+                }
             }
         });
     }
@@ -78,7 +82,9 @@ class World {
                     this.level.enemies.splice(i, 1);
                 }, 400);
                     this.throwableObjects.splice(j, 1);
-                    playAudio('audio/chicken.wav');
+                    if(!isPaused) {
+                        playAudio('audio/chicken.wav');
+                    }
                 }
             })
         });
@@ -102,7 +108,9 @@ class World {
                 this.character.collectCoin();
                 this.statusBarCoin.collectCoins(this.character.coin);
                 this.level.coins.splice(i, 1);
-                playAudio('audio/coins.mp3');
+                if(!isPaused) {
+                    playAudio('audio/coins.mp3');
+                }
             }
         });
     }
@@ -115,7 +123,9 @@ class World {
                 this.statusBarBottle.collectBottles(this.character.bottle);
                 this.level.bottles.splice(i, 1);
                 this.amountCollectBottles++;
-                playAudio('audio/bottle.mp3');
+                if(!isPaused) {
+                    playAudio('audio/bottle.mp3');
+                }
             }
         });
     }
@@ -134,7 +144,9 @@ class World {
             if (this.endboss.isCollidingCollectables(bottle)) {
                 this.endboss.hurtEndboss();
                 this.statusBarEndboss.reduceLife(this.endboss.energy);
-                playAudio('audio/endboss-scream.mp3');
+                if(!isPaused) {
+                    playAudio('audio/endboss-scream.mp3');
+                }
                 this.throwableObjects.splice(i, 1);
             }
         }); 

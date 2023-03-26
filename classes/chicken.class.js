@@ -34,12 +34,12 @@ class Chicken extends MovableObject {
 
 
     animate() {
-        this.move_left();
+        setStoppableInterval(() =>  this.move_left(), 1000 / 60);
         setStoppableInterval(() => this.chickenAnimation(), 200);
     }
 
+
     chickenAnimation() {
-       
         if (this.chickenEnergy == 0) {
             this.speed = 0;
             this.loadImage(this.IMAGE_CHICKEN_DEAD);
@@ -48,6 +48,7 @@ class Chicken extends MovableObject {
         }
     }
 }
+
 
 
 

@@ -25,17 +25,15 @@ class MovableObject extends DrawableObject{
 
     // Objekte bewegen sich nach links (Wolken, Hühnchen)
     move_left() {
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60);
+        this.x -= this.speed;
     }
-
+    
     move_right() {
         setInterval(() => {
             this.x += this.speed;
         }, 1000 / 60);
     }
-
+   
     // Beim Springen Berrechnung des Fallens
     gravity() {
         setInterval(() => {

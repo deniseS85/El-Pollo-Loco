@@ -41,5 +41,16 @@ class DrawableObject {
         
     }
 
+   /*  loadImage(path) {
+        this.img = totalImageCache[path];
+    }
+
+
+    loadImages(array) {
+        array.forEach((path) => {
+            this.imageCache[path] = totalImageCache[path];
+        });
+    } */
+
 }
 
