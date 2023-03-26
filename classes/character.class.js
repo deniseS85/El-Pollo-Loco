@@ -77,9 +77,7 @@ class Character extends MovableObject {
     ]
 
     world; // zugreifen auf Variablen von world
-    walk_sound = new Audio('audio/walk.mp3');
-    jump_sound = new Audio('audio/jump.mp3');
-    snoring_sound = new Audio('audio/snoring.mp3');
+
    
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -101,28 +99,28 @@ class Character extends MovableObject {
 
 
     moveCharacter() {
-        this.walk_sound.pause();
+        walk_sound.pause();
         if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
            this.walk_right();
            if(!isSound) {
-                this.walk_sound.play();
-                this.snoring_sound.pause();    
+                walk_sound.play();
+                snoring_sound.pause();    
            }
         }
 
         if(this.world.keyboard.LEFT && this.x > 0) {
             this.walk_left();
             if(!isSound) {
-                this.walk_sound.play();
-                this.snoring_sound.pause();
+                walk_sound.play();
+                snoring_sound.pause();
             }
         }
      
         if (this.world.keyboard.UP && !this.isJumping()) {
             this.jump();
             if(!isSound) {
-                this.jump_sound.play();
-                this.snoring_sound.pause();
+                jump_sound.play();
+                snoring_sound.pause();
             }
         }
          // Kameraführung
@@ -153,12 +151,12 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_IDLE);
             this.idleTimer += 250;
         } 
-        if (this.idleTimer >= 7000 && !this.isDead()) {
+        if (this.idleTimer >= 7000 && !this.isDead() && !this.reduceBottleByThrowing()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
             if(!isSound) {
-                this.snoring_sound.play().volume = 0.1;
+                snoring_sound.play().volume = 0.1;
             } else {
-                this.snoring_sound.pause();
+                snoring_sound.pause();
             }
         }
     }

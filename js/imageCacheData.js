@@ -117,13 +117,12 @@ let bottleImagePath = [
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ]
 ];
-/* 
+
 let cloudImagePaths = [
     [
-        'img/5_background/layers/4_clouds/1.png',
-        'img/5_background/layers/4_clouds/2.png'
+        'img/5_background/layers/4_clouds/full.png'
     ]
-]; */
+];
 
 let coinImagePaths = [
     [
@@ -178,8 +177,6 @@ let statusbarHealthImagePaths = [
 
 let throwableObjectImagePaths = [
     [
-        /* 'img/6_salsa_bottle/salsa_bottle.png' */
-    ], [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
@@ -193,14 +190,12 @@ let throwableObjectImagePaths = [
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ]
 ];
-/* 
 
-let AIR = [['img/5_background/layers/air.png']];
-let THIRD_LAYERV2 = [['img/5_background/layers/3_third_layer/2.png']];
-let SECOND_LAYERV2 = [['img/5_background/layers/2_second_layer/2.png']];
-let FIRST_LAYERV2 = [['img/5_background/layers/1_first_layer/2.png']];
-
-let THIRD_LAYERV1 = [['img/5_background/layers/3_third_layer/1.png']];
-let SECOND_LAYERV1 = [['img/5_background/layers/2_second_layer/1.png']];
-let FIRST_LAYERV1 = [['img/5_background/layers/1_first_layer/1.png']];
- */
+let backgroundImagePaths = [
+    [
+        'img/5_background/layers/air.png',
+        'img/5_background/layers/3_third_layer/2.png',
+        'img/5_background/layers/2_second_layer/2.png',
+        'img/5_background/layers/1_first_layer/2.png'
+    ]
+]

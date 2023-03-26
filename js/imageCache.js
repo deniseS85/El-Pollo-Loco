@@ -6,20 +6,14 @@ let allImagesPaths = [
     smallChickenImagePaths,
     endbossImagePaths,
     bottleImagePath,
-   /*  cloudImagePaths, */
+    cloudImagePaths,
     coinImagePaths,
     statusbarBossImagePaths,
     statusbarBottleImagePaths,
     statusbarCoinImagePaths,
     statusbarHealthImagePaths,
     throwableObjectImagePaths,
-   /*  AIR,
-    THIRD_LAYERV2,
-    SECOND_LAYERV2,
-    FIRST_LAYERV2,
-    THIRD_LAYERV1,
-    SECOND_LAYERV1,
-    FIRST_LAYERV1 */
+    backgroundImagePaths
 ];
 
 

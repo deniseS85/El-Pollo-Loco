@@ -7,6 +7,9 @@ let isOpenPopUp = false;
 let isSound = false;
 let isPaused = false;
 let intervalIds = [];
+let snoring_sound = new Audio('audio/snoring.mp3');
+let walk_sound = new Audio('audio/walk.mp3');
+let jump_sound = new Audio('audio/jump.mp3');
 
 
 function init() {
@@ -27,6 +30,14 @@ function startGame() {
     game_music.play('audio/game-loop.mp3');
     isMusic = true;
     touchPanel();
+}
+
+function showLoadingScreen() {
+    document.getElementById('loader').classList.remove('d-none');
+}
+
+function hideLoadingScreen() {
+    document.getElementById('loader').classList.add('d-none');
 }
 
 
@@ -53,7 +64,9 @@ function noPause() {
 function stopGame() {
     intervalIds.forEach(clearInterval);
     game_music.pause();
-    // schnarchen off
+    snoring_sound.pause();
+    walk_sound.pause();
+    jump_sound.pause();
     isPaused = true;
     
 }
@@ -63,7 +76,6 @@ function continueGame() {
     if (isPaused) {
         reActivateAnimations();
         isPaused = false;
-        //schnarchen on
         if(isMusic) {
             game_music.play();
         }  
@@ -76,6 +88,7 @@ function reActivateAnimations() {
     world.level.clouds.forEach(cloud => { cloud.animate() });
     world.level.coins.forEach(coin => { coin.animate() });
     world.throwableObjects.forEach(obj => { obj.throwBottle() });
+    world.character.gravity();
     world.endboss.animate();
     world.character.animate();
 }

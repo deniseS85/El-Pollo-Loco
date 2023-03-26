@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     x = 5400;
     width = 350;
     height = 400;
-    speed = 1;
+    speed = 1.2;
     offset = {
         top: 50,
         left: 10,
@@ -67,19 +67,19 @@ class Endboss extends MovableObject {
         setStoppableInterval(() => this.playEndboss(), 120);
     } 
 
+    
     moveEndboss() {
         if (world.character.x > 4650) {
             this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
-            this.move_left();
-            
+            setStoppableInterval(() =>  this.move_left(), 1000 / 30 );
         }
-    }
+    } 
 
 
     playEndboss() {
         if (world.endboss.x - world.character.x <= 400 && !this.isHurt()) {  // Abstand zwischen Charakter und Endboss
             this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
-            this.speed = 0.3;
+            this.speed = 0;
         }
         if (world.endboss.x - world.character.x <= 350 && !this.isHurt()) { 
             this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
@@ -96,6 +96,4 @@ class Endboss extends MovableObject {
             this.speed = 0;
         }
     }
-
-
 }

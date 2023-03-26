@@ -36,7 +36,7 @@ class MovableObject extends DrawableObject{
    
     // Beim Springen Berrechnung des Fallens
     gravity() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isJumping() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
