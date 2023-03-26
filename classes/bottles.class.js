@@ -13,5 +13,4 @@ class Bottles extends MovableObject {
         this.x = x;
         this.y = y;
     }
-
 }

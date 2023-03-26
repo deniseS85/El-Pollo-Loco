@@ -76,8 +76,7 @@ function stopGame() {
     snoring_sound.pause();
     walk_sound.pause();
     jump_sound.pause();
-    isPaused = true;
-    
+    isPaused = true;  
 }
 
 
