@@ -101,12 +101,15 @@ function stopGame() {
 
 
 function continueGame() {
+    isMusic = localStorage.getItem('music_on', isMusic);
     if (isPaused) {
         reActivateAnimations();
         isPaused = false;
-        if(isMusic) {
-            game_music.play();
-        }  
+    }
+    if (isMusic == 'false') {
+        game_music.pause();
+    } else {
+        game_music.play();
     }
 }
 
@@ -121,7 +124,6 @@ function reActivateAnimations() {
     world.character.gravity();
     world.endboss.animate();
     world.character.animate();
-
 }
 
 

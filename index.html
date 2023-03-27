@@ -37,7 +37,7 @@
 </head>
 <body onload="init()">
     
-    <div id="loader" style="display:none"></div>
+    <div id="loader"></div>
 
     <div class="rotate-screen">
         <span class="rotate-text">Please rotate device</span>
@@ -77,7 +77,7 @@
             <img onclick="window.location.href ='index.html'" class="home" src="img/home.png">
             <img onclick="pauseAndContinueGame(this)" class="play-pause" src="img/play.png">
             <img onclick="stopMusic(this)" class="music-off" src="img/music-on.png">
-            <img onclick="stopSound(this)" class="mute" src="img/no-mute.png">
+            <img onclick="stopSound(this)" id="mute" class="mute" src="img/no-mute.png">
             <img onclick="openPopUpGame(this)" class="control" src="img/control.png">
             <img onclick="fullscreen()" class="fullscreen" src="img/fullscreen.png">
 

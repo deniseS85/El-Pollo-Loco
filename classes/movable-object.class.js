@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject{
     coin = 0;
     bottle = 0;
     lastHurt = 0;
+    attack = false;
     offset = { // Bereich zwischen Objektframe und dem Objekt selber
         top: 0,
         left: 0,

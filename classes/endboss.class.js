@@ -3,7 +3,8 @@ class Endboss extends MovableObject {
     x = 5400;
     width = 350;
     height = 400;
-    speed = 1.2;
+    speed = 20;
+    speedThroughHit = 50;
     offset = {
         top: 50,
         left: 10,
@@ -51,6 +52,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
+    hadFirstContact = false;
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING_ENDBOSS[0]);
@@ -62,38 +64,32 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+  
     animate() {
-        setStoppableInterval(() => this.moveEndboss(), 800);
-        setStoppableInterval(() => this.playEndboss(), 120);
-    } 
+        let i = 0;
+        setStoppableInterval(() => {
+            this.playEndboss(i);
+            i++;
+            if (world.character.x > 4650 && !this.hadFirstContact) {
+                i = 0;
+                this.hadFirstContact = true;
+            }
+        }, 120);
+    }
 
     
-    moveEndboss() {
-        if (world.character.x > 4650 || this.isHurt()) {
-            this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
-            setStoppableInterval(() =>  this.move_left(), 1000 / 60 );
-        }
-    } 
-
-
-    playEndboss() {
-        if (world.endboss.x - world.character.x <= 400 && !this.isHurt()) {  // Abstand zwischen Charakter und Endboss
+    playEndboss(i) {
+        if (i < 15) {
             this.playAnimation(this.IMAGES_ALERT_ENDBOSS);
-            this.speed = 0;
-        }
-        if (world.endboss.x - world.character.x <= 350 && !this.isHurt()) { 
+        } else if (!this.isDead() && !this.isHurt() && world.character.x > world.endboss.x - 1000) {
+            this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
+            this.move_left();
+        } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_ATTACK_ENDBOSS);
-            this.speed = 0.3;
-        }
-
-        if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT_ENDBOSS);
-            this.speed = 0;
-        } 
-
-        if (this.isDead()) {
+            world.endboss.x -= this.speedThroughHit;
+        } else if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD_ENDBOSS);
-            this.speed = 0;
         }
     }
+
 }
