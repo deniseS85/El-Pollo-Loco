@@ -14,16 +14,16 @@ let jump_sound = new Audio('audio/jump.mp3');
 
 
 function init() {
+    awaitLoadingImages();
     canvas = document.getElementById('canvas');
 }
 
 
-function startGame() {
-    awaitLoadingImages();
+function startGame(el) {
     changeClasses();
     world = new World(canvas, keyboard);
-    game_music.play('audio/game-loop.mp3');
-    isMusic = true;
+    requestIsSelectedSound(el);
+    requestIsSelectedMusic(el);   
     touchPanel();
 }
 
@@ -45,17 +45,37 @@ function hideLoadingScreen() {
 }
 
 
+function requestIsSelectedSound(el) {
+    isSound = localStorage.getItem('mute', isSound);
+    if (isSound == 'true') {
+       el.closest('.game-content').querySelector('.mute').src = 'img/mute.png';
+       isSound = true;
+    } else {
+        el.closest('.game-content').querySelector('.mute').src = 'img/no-mute.png';
+        isSound = false;
+    } 
+}
+
+
+function requestIsSelectedMusic(el) {
+    isMusic = localStorage.getItem('music_on', isMusic);
+    if (isMusic == 'false') {
+        el.closest('.game-content').querySelector('.music-off').src = 'img/music-off.png';
+        game_music.pause();
+    } else {
+        el.closest('.game-content').querySelector('.music-off').src = 'img/music-on.png';
+        isMusic = true;
+        game_music.play();
+    }
+}
+
+
 function pauseAndContinueGame() {
     if (!isPaused && world) {
        pause();
     } else if (isPaused) {
        noPause();
     }
-    /* if (el.src.match('img/play.png')) {
-        el.src = 'img/pause.png';
-    } else {
-        el.src = 'img/play.png';
-    } */
 }
 
 function pause() {
@@ -184,10 +204,12 @@ function stopMusic(el) {
         game_music.pause();
         el.src = 'img/music-off.png';
         isMusic = false;
+        localStorage.setItem('music_on', isMusic);
     } else {
         game_music.play();
         el.src = 'img/music-on.png';
         isMusic = true;
+        localStorage.setItem('music_on', isMusic);
     }
 }
 
@@ -195,18 +217,18 @@ function stopMusic(el) {
 function stopSound(el) {
     if (el.src.match('img/mute.png')) {
         el.src = 'img/no-mute.png';
-        isPaused = false;
         isSound = false;
+        localStorage.setItem('mute', isSound);
     } else {
         el.src = 'img/mute.png';
-        isPaused = true;
         isSound = true;
+        localStorage.setItem('mute', isSound);
     }
 }
 
 
 window.addEventListener('keydown', (event) => {
-    if(event.key == " " && !isPaused) {
+    if(event.key == " ") {
         keyboard.SPACE = true;
     }
     if(event.key == "ArrowLeft") {
@@ -228,7 +250,7 @@ window.addEventListener('keydown', (event) => {
 
 
 window.addEventListener('keyup', (event) => {
-    if(event.key == " " && !isPaused) {
+    if(event.key == " ") {
         keyboard.SPACE = false;
     }
     if(event.key == "ArrowLeft") {

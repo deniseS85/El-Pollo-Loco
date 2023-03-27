@@ -144,7 +144,7 @@ class Character extends MovableObject {
 
 
     idleAnimation() {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.SPACE) {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP) {
             this.idleTimer = 0;
         }
         if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.UP && this.idleTimer < 7000 && !this.isDead()) {

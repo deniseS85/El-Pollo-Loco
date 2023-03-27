@@ -69,9 +69,9 @@ class Endboss extends MovableObject {
 
     
     moveEndboss() {
-        if (world.character.x > 4650) {
+        if (world.character.x > 4650 || this.isHurt()) {
             this.playAnimation(this.IMAGES_WALKING_ENDBOSS);
-            setStoppableInterval(() =>  this.move_left(), 1000 / 30 );
+            setStoppableInterval(() =>  this.move_left(), 1000 / 60 );
         }
     } 
 

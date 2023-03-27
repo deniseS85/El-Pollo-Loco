@@ -54,8 +54,4 @@ class ThrowableObject extends MovableObject {
         }, 80);
 
     }
-    
-
-
-
 }
