@@ -44,7 +44,7 @@ class ThrowableObject extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.y > 250 || this.hurtEndboss() || this.killChicken()) {
                 this.playAnimation(this.IMAGES_BOTTLES_SPLASH);
                 this.x += 5;

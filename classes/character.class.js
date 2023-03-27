@@ -147,11 +147,11 @@ class Character extends MovableObject {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.SPACE) {
             this.idleTimer = 0;
         }
-        if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.UP && this.idleTimer < 7000 && !this.isDead() && !this.reduceBottleByThrowing()) {
+        if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.UP && this.idleTimer < 7000 && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idleTimer += 250;
         } 
-        if (this.idleTimer >= 7000 && !this.isDead() && !this.reduceBottleByThrowing()) {
+        if (this.idleTimer >= 7000 && !this.isDead()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
             if(!isSound) {
                 snoring_sound.play().volume = 0.1;

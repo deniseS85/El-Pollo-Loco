@@ -45,17 +45,17 @@ function hideLoadingScreen() {
 }
 
 
-function pauseAndContinueGame(el) {
+function pauseAndContinueGame() {
     if (!isPaused && world) {
        pause();
     } else if (isPaused) {
        noPause();
     }
-    if (el.src.match('img/play.png')) {
+    /* if (el.src.match('img/play.png')) {
         el.src = 'img/pause.png';
     } else {
         el.src = 'img/play.png';
-    }
+    } */
 }
 
 function pause() {
@@ -92,13 +92,16 @@ function continueGame() {
 
 
 function reActivateAnimations() {
-    world.level.enemies.forEach(enemy => { enemy.animate() });
-    world.level.clouds.forEach(cloud => { cloud.animate() });
-    world.level.coins.forEach(coin => { coin.animate() });
-    world.throwableObjects.forEach(obj => { obj.throwBottle() });
+    world.level.enemies.forEach(enemy => {enemy.animate()});
+    world.level.clouds.forEach(cloud => {cloud.animate()});
+    world.level.coins.forEach(coin => {coin.animate()});
+    world.throwableObjects.forEach(obj => {obj.throwBottle()});
+    world.throwableObjects.forEach(obj => {obj.throw()});
+    world.throwableObjects.forEach(obj => {obj.animate()});
     world.character.gravity();
     world.endboss.animate();
     world.character.animate();
+
 }
 
 
