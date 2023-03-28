@@ -12,7 +12,6 @@ class EndScreen extends MovableObject {
 
     game_lost_audio = new Audio('audio/game-over.mp3');
     game_over_audio = new Audio('audio/game-win.mp3');
-    loop = false;
     
     constructor() {
         super().loadImage('');

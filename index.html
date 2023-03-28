@@ -46,9 +46,9 @@
     <div class="game-content">
         <div id="initPage" class="init-page"> 
 
-            <img id="startImage" class="startImage" onclick="closePopUp(this)" src="img/9_intro_outro_screens/start/startscreen_1.png">
-            <button class="start-btn" onclick="startGame(this), playAudio('audio/klick-button.mp3')">Start</button>
-            <button class="control-btn" onclick="openPopUp(this)">Control</button>
+            <img id="startImage" class="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
+            <button id="start-btn" class="start-btn" onclick="startGame(this), playAudio('audio/klick-button.mp3')">Start</button>
+            <button id="control-btn" class="control-btn" onclick="openPopUpGame(this)">Control</button>
 
             <div id="popUp" class="popUp d-none" onclick="doNotClosePopup(event)">
                 <div class="control-content">
@@ -73,7 +73,7 @@
         </div>
         
         <div id="canvas-container" class="canvas-container d-none">
-            <canvas onclick="closePopUp(this)" id="canvas" class="canvas" width="720" height="480"></canvas>
+            <canvas id="canvas" class="canvas" width="720" height="480"></canvas>
             <button onclick="startGame(this)" id="restart-button" class="restart-button d-none">Restart</button>
             <button onclick="home(this)" id="home-button" class="home-button d-none">Home</button>
             <img onclick="home(this)" class="home" src="img/home.png">
@@ -115,9 +115,7 @@
             </div>
         </div>
 
-        <img src="img/frame-bg.png" id="frame-bg" class="frame-bg" onclick="closePopUp(this)"> 
-        
+        <img src="img/frame-bg.png" id="frame-bg" class="frame-bg" onclick="openPopUpGame(this)"> 
     </div>
-
 </body>
 </html>

@@ -170,14 +170,14 @@ class Character extends MovableObject {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP) {
             this.idleTimer = 0;
         }
-        if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.UP && this.idleTimer < 7000 && !this.isDead()) {
+        if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && !this.world.keyboard.UP && this.idleTimer < 7300 && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idleTimer += 250;
         } 
-        if (this.idleTimer >= 7000 && !this.isDead()) {
+        if (this.idleTimer >= 7300 && !this.isDead()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
             if(!isSound) {
-                snoring_sound.play().volume = 0.1;
+                snoring_sound.play();
             } else {
                 snoring_sound.pause();
             }

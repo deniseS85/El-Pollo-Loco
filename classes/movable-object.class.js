@@ -77,10 +77,10 @@ class MovableObject extends DrawableObject{
     // Berechnung Koordinaten für die Kollision der Objekte
     isCollidingChicken(moveObject) {
         return ( 
-        this.x + this.width - this.offset.left > moveObject.x &&
-        this.y + this.height > moveObject.y &&
-        this.x < moveObject.x - this.offset.left + moveObject.width &&
-        this.y < moveObject.y + moveObject.height
+            this.x + this.width - this.offset.left > moveObject.x &&
+            this.y + this.height > moveObject.y &&
+            this.x < moveObject.x - this.offset.left + moveObject.width &&
+            this.y < moveObject.y + moveObject.height
         );
     }
 

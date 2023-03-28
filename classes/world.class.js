@@ -26,6 +26,18 @@ class World {
         this.run();
     }
 
+    /**
+     * empty object property level on reset
+     */
+    deconstructor() {
+        this.level.enemies = [];
+        this.level.clouds = [];
+        this.level.background = [];
+        this.level.coins = [];
+        this.level.bottles = [];
+    }
+
+
     // damit Charakter auf Pfeiltasten reagieren kann
     setWorld() {
         this.character.world = this;
@@ -51,9 +63,7 @@ class World {
             if (this.character.isCollidingChicken(enemy) && !this.character.isJumping() && !isPaused) {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
-                if(!isPaused) {
-                    playAudio('audio/hurt.mp3');
-                }
+                playAudio('audio/hurt.mp3');
             }
         });
     }
