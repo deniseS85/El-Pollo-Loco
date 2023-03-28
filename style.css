@@ -19,8 +19,9 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    max-width: 100vw;
     background-image: url('img/background.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
 }
 
 h1 {
@@ -129,18 +130,18 @@ canvas {
     width: 454px;
     height: 315px;
     margin: auto;
-    padding: 10px;
+    padding: 31px 10px;
     background-color: rgb(255, 150, 1);
     border-radius: 15px;
     box-shadow: 2px 2px 6px #6d3205, -2px -2px 6px #6d3205; 
+    z-index: 999;
 }
+
 
 .control-content {
     display: flex;
     justify-content: space-evenly;
     height: 177px;
-    margin-top: 18px;
-    margin-bottom: 18px;
 }
 .popUpLeft, .popUpRight {
     display: flex;
@@ -169,7 +170,8 @@ canvas {
 }
 
 hr {
-    margin: 7px;
+    margin-top: 20px;
+    margin-bottom: 2px;
     opacity: 1;
 }
 
@@ -398,8 +400,11 @@ hr {
         font-size: 19px;
     }
     .control-content {
-        height: unset;
+        height: 112px;
         margin-top: 0;
+    }
+    .popUpLeft span {
+        font-size: 18px;
     }
     .control, .mute, .music-off {
         width: 38px;
@@ -462,8 +467,11 @@ hr {
         display: none;
     }
     .control-content {
-        height: unset;
+        height: 112px;
         margin-top: 0;
+    }
+    .popUpLeft span {
+        font-size: 18px;
     }
     .popUp {
         width: 50%;

@@ -21,6 +21,7 @@ async function loadAllImagesToCache() {
     for (let i = 0; i < allImagesPaths.length; i++) {
         await loadImagesListToCache(allImagesPaths[i]);
     }
+    
 }
 
 
@@ -48,9 +49,11 @@ const loadSingleImage = path => {
         img.src = path
         img.onload = () => {
             resolve(img)
+            
         }
         img.onerror = e => {
             reject(e)
         }
     })
+     
 }

@@ -1,7 +1,6 @@
 class MovableObject extends DrawableObject{
     speed = 0.2;
     otherDirection = false;
-    speedY = 0;
     acceleration = 2.5; // Beschleunigung
     energy = 100;
     coin = 0;
@@ -49,7 +48,7 @@ class MovableObject extends DrawableObject{
 
     // springen
     jump() {
-        this.speedY = 30;
+        this.speedY = 25;
     }
 
     // Wenn Objekt in der Luft ist
@@ -91,6 +90,7 @@ class MovableObject extends DrawableObject{
             this.lastHit = new Date().getTime();
         }
     }
+    
 
     isCollidingCollectables(moveObject) {
         return (

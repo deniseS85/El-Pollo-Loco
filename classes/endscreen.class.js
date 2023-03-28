@@ -38,9 +38,9 @@ class EndScreen extends MovableObject {
             game_music.pause();
             stopGame();
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 3800);
-        }, 2000);
+                window.location.reload();
+            }, 3400);
+        }, 1000);
     }
 
     gameLost() {
@@ -52,8 +52,8 @@ class EndScreen extends MovableObject {
             game_music.pause();
             stopGame();
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 3800);
-        }, 2000);
+                window.location.reload();
+            }, 3400);
+        }, 1000);
     }
 }

@@ -14,6 +14,8 @@ class World {
     endScreen = new EndScreen();
     throwableObjects = [];
     amountCollectBottles = 0;
+    lastThrow = false;
+    alreadyThrow = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -35,18 +37,18 @@ class World {
             this.checkCollisionChicken();
             this.checkJumpOnChicken();
             this.checkBottleKillChicken();
-            this.checkThroughObject();
             this.checkCollectCoins();
             this.checkCollectBottles();
             this.checkCollisionEndboss();
             this.checkHitbyBottle();
+            this.checkTimeThrowNextBottle();
         }, 100);
     }
 
     
     checkCollisionChicken() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingChicken(enemy) && !this.character.isJumping()) {
+            if (this.character.isCollidingChicken(enemy) && !this.character.isJumping() && !isPaused) {
                 this.character.hurt();
                 this.statusBarLife.reduceLife(this.character.energy);
                 if(!isPaused) {
@@ -91,16 +93,41 @@ class World {
     }
 
 
-    checkThroughObject() {
-        if (this.keyboard.SPACE && this.amountCollectBottles > 0) {
-            let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
-            this.throwableObjects.push(bottle); 
-            this.character.reduceBottleByThrowing();
-            snoring_sound.pause();
-            this.statusBarBottle.collectBottles(this.character.bottle);
-            this.amountCollectBottles--;
+    checkTrowObject() {
+        if (this.keyboard.SPACE && this.amountCollectBottles > 0 && !this.lastThrow) {
+            this.alreadyThrow = true;
+            this.checkThrowBottle();
+        } else {
+            this.timeThrowNextBottle();
         }
     }
+
+    
+    checkThrowBottle() {
+        this.lastThrow = true;
+        let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
+        this.throwableObjects.push(bottle); 
+        this.amountCollectBottles--;
+        this.character.reduceBottleByThrowing();
+         this.statusBarBottle.collectBottles(this.character.bottle);
+         snoring_sound.pause();
+    }
+
+     checkTimeThrowNextBottle() {
+        setStoppableInterval(() => {
+            this.checkTrowObject();
+        }, 1000 / 60);
+    }
+
+    timeThrowNextBottle() {
+        if (this.alreadyThrow) {
+            this.alreadyThrow = false;
+            setTimeout(() => {
+                this.lastThrow = false;
+            }, 1000);
+        }
+    }
+
 
 
     checkCollectCoins() {

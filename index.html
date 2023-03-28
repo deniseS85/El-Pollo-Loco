@@ -46,11 +46,11 @@
     <div class="game-content">
         <div id="initPage" class="init-page"> 
 
-            <img id="startImage" class="startImage" src="img/9_intro_outro_screens/start/startscreen_1.png">
+            <img id="startImage" class="startImage" onclick="closePopUp(this)" src="img/9_intro_outro_screens/start/startscreen_1.png">
             <button class="start-btn" onclick="startGame(this), playAudio('audio/klick-button.mp3')">Start</button>
             <button class="control-btn" onclick="openPopUp(this)">Control</button>
 
-            <div id="popUp" class="popUp d-none">
+            <div id="popUp" class="popUp d-none" onclick="doNotClosePopup(event)">
                 <div class="control-content">
                     <div class="popUpLeft">
                         <img src="img/arrow_right.png">
@@ -73,8 +73,8 @@
         </div>
         
         <div id="canvas-container" class="canvas-container d-none">
-            <canvas id="canvas" class="canvas" width="720" height="480"></canvas>
-            <img onclick="window.location.href ='index.html'" class="home" src="img/home.png">
+            <canvas onclick="closePopUp(this)" id="canvas" class="canvas" width="720" height="480"></canvas>
+            <img onclick="home(this)" class="home" src="img/home.png">
             <img onclick="pauseAndContinueGame(this)" class="play-pause" src="img/play.png">
             <img onclick="stopMusic(this)" class="music-off" src="img/music-on.png">
             <img onclick="stopSound(this)" id="mute" class="mute" src="img/no-mute.png">
@@ -91,7 +91,7 @@
                     <img id="throw-touch" src="img/bottle-touch.png">
                 </div>
             </div>
-            <div class="popUp d-none">
+            <div id="popUpGame" class="popUp" onclick="doNotClosePopup(event)">
                 <div class="control-content">
                     <div class="popUpLeft">
                         <img src="img/arrow_right.png">
@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <img src="img/frame-bg.png" class="frame-bg"> 
+        <img src="img/frame-bg.png" id="frame-bg" class="frame-bg" onclick="closePopUp(this)"> 
     </div>
 
 </body>
