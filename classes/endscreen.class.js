@@ -12,35 +12,41 @@ class EndScreen extends MovableObject {
 
     game_lost_audio = new Audio('audio/game-over.mp3');
     game_over_audio = new Audio('audio/game-win.mp3');
-
+    loop = false;
+    
     constructor() {
         super().loadImage('');
         this.checkGameOver();
     }
 
+    /**
+     * check game is finish
+     */
     checkGameOver() {
-        setInterval(() => {
+        let id = setInterval(() => {
             if (this.world.character.isDead()) {
                 this.gameLost();
+                clearInterval(id);
             }
             if (this.world.endboss.isDead()) {
                 this.gameWon();
+                clearInterval(id);
             }
         }, 200);
     }
+
 
     gameWon() {
         setTimeout(() => {
             this.img = new Image();
             this.img.src = this.IMAGE_END;
-            this.deadEnemies = true;   
+            this.deadEnemies = true; 
             this.game_over_audio.play();
             game_music.pause();
             stopGame();
-            setTimeout(() => {
-                window.location.reload();
-            }, 3400);
-        }, 1000);
+            document.getElementById('restart-button').classList.remove('d-none');
+            document.getElementById('home-button').classList.remove('d-none');
+        }, 200);
     }
 
     gameLost() {
@@ -51,9 +57,11 @@ class EndScreen extends MovableObject {
             this.game_lost_audio.play();
             game_music.pause();
             stopGame();
-            setTimeout(() => {
-                window.location.reload();
-            }, 3400);
-        }, 1000);
+            document.getElementById('restart-button').classList.remove('d-none');
+            document.getElementById('home-button').classList.remove('d-none');
+        }, 200);
     }
+
+   
 }
+

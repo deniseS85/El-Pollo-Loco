@@ -48,7 +48,9 @@ class MovableObject extends DrawableObject{
 
     // springen
     jump() {
-        this.speedY = 25;
+        if(!this.isHurt()) {
+            this.speedY = 25;
+        }
     }
 
     // Wenn Objekt in der Luft ist
@@ -102,7 +104,7 @@ class MovableObject extends DrawableObject{
     }
 
     hurt() {
-        this.energy -= 5;
+        this.energy -= 2;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -121,9 +123,9 @@ class MovableObject extends DrawableObject{
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHurt;
-        timepassed = timepassed / 1000;
-        return timepassed < 1;
+        return timepassed < 250;
     }
+
 
     collectCoin() {
         this.coin += 1;

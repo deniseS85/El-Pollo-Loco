@@ -94,7 +94,7 @@ class World {
 
 
     checkTrowObject() {
-        if (this.keyboard.SPACE && this.amountCollectBottles > 0 && !this.lastThrow) {
+        if (this.keyboard.SPACE && this.amountCollectBottles > 0 && !this.lastThrow && !this.character.isHurt()) {
             this.alreadyThrow = true;
             this.checkThrowBottle();
         } else {
@@ -113,11 +113,16 @@ class World {
          snoring_sound.pause();
     }
 
-     checkTimeThrowNextBottle() {
+
+    /**
+     * check when the next bottle can be trowed
+     */
+    checkTimeThrowNextBottle() {
         setStoppableInterval(() => {
             this.checkTrowObject();
         }, 1000 / 60);
     }
+
 
     timeThrowNextBottle() {
         if (this.alreadyThrow) {
@@ -128,8 +133,7 @@ class World {
         }
     }
 
-
-
+    
     checkCollectCoins() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isCollidingCollectables(coin)) {

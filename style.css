@@ -40,6 +40,10 @@ h1 {
     position: relative;
 }
 
+.game-over-page {
+    position: relative;
+}
+
 .init-page img {
     width: 720px;
     height: 480px;
@@ -105,7 +109,7 @@ button:hover {
     }
 }
   
-.start-btn {
+.start-btn{
     left: 25%;
     color:black;
 }
@@ -113,6 +117,18 @@ button:hover {
 .control-btn {
     right: 25%;
     color: black;
+}
+
+.home-button {
+    right: 25%;
+    color: black;
+    z-index: 999;
+}
+
+.restart-button {
+    left: 25%;
+    color: black;
+    z-index: 999;
 }
 
 canvas {

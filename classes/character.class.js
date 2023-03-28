@@ -88,8 +88,10 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.animate();
+        this.hurtCharacter();
         this.gravity();
     }
+
 
     animate() {
         setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
@@ -98,6 +100,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * press < move left, press > move right, press ^ jumg
+     */
     moveCharacter() {
         walk_sound.pause();
         if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -123,16 +128,19 @@ class Character extends MovableObject {
                 snoring_sound.pause();
             }
         }
-         // Kameraführung
+        // camera movement
         this.world.camera_x = -this.x + 100;
     }
         
     
+    /**
+     * show images, if character is dead, is hurt or jumping
+     */
     playCharacter() {
         if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
-        } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
+        /* } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT); */
         } else if (this.isJumping()) {
             this.playAnimation(this.IMAGES_JUMPING);
         } else {
@@ -143,6 +151,21 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * show images, when character is colliding with enemies
+     */
+    hurtCharacter() {
+        setStoppableInterval(() => {
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            }
+        }, 50);
+    }
+
+
+    /**
+     * show images, if character is sleeping, time will be calculate if character start to sleep
+     */
     idleAnimation() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP) {
             this.idleTimer = 0;
