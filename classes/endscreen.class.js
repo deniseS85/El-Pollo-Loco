@@ -43,7 +43,9 @@ class EndScreen extends MovableObject {
             this.img = new Image();
             this.img.src = this.IMAGE_END;
             this.deadEnemies = true; 
-            this.game_over_audio.play();
+            if (!isSound) {
+                this.game_over_audio.play();
+            }
             game_music.pause();
             stopGame();
             document.getElementById('restart-button').classList.remove('d-none');
@@ -60,7 +62,9 @@ class EndScreen extends MovableObject {
             this.img = new Image();
             this.img.src = this.IMAGE_LOST;
             this.lost = true;     
-            this.game_lost_audio.play();
+            if (!isSound) {
+                this.game_lost_audio.play();
+            }
             game_music.pause();
             stopGame();
             document.getElementById('restart-button').classList.remove('d-none');

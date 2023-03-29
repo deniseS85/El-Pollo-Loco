@@ -33,7 +33,6 @@ function startGame(el) {
     requestIsSelectedMusic(el);
     if (world) {
         world.deconstructor();
-        console.log("call test");
     }
     world = new World(canvas, keyboard); 
     touchPanel(); 
