@@ -59,9 +59,7 @@ class MovableObject extends DrawableObject{
      * character can jump at a certain speed
      */
     jump() {
-        if(!this.isHurt()) {
-            this.speedY = 25;
-        }
+        this.speedY = 25;
     }
 
 
