@@ -78,6 +78,10 @@ class Endboss extends MovableObject {
     }
 
     
+    /**
+     * show images if endbos is alert, is walking, is attack and is dead
+     * @param {number} i 
+     */
     playEndboss(i) {
         if (i < 15) {
             this.playAnimation(this.IMAGES_ALERT_ENDBOSS);

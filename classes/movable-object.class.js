@@ -15,7 +15,7 @@ class MovableObject extends DrawableObject{
     };
     
 
-    // Lauf-Animation
+    // Running animation
     playAnimation(images) {
         let index = this.currentImage % images.length; //setIntervall geht nur bis zum letzten Bild im Array (i = 0,1,2,3,4,5,0,1,2,3,4,5,...)
         let path = images[index];
@@ -23,18 +23,26 @@ class MovableObject extends DrawableObject{
         this.currentImage++;
     }
 
-    // Objekte bewegen sich nach links (Wolken, Hühnchen)
+
+    // Objects move to the left (clouds, chicken)
     move_left() {
         this.x -= this.speed;
     }
     
+
+    /**
+     * move right
+     */
     move_right() {
         setInterval(() => {
             this.x += this.speed;
         }, 1000 / 60);
     }
    
-    // Beim Springen Berrechnung des Fallens
+
+    /**
+     * When jumping Calculation of falling
+     */
     gravity() {
         setStoppableInterval(() => {
             if (this.isJumping() || this.speedY > 0) {
@@ -46,14 +54,21 @@ class MovableObject extends DrawableObject{
         },1000 / 25);
     }
 
-    // springen
+
+    /**
+     * character can jump at a certain speed
+     */
     jump() {
         if(!this.isHurt()) {
             this.speedY = 25;
         }
     }
 
-    // Wenn Objekt in der Luft ist
+
+    /**
+     * character is in the air at a certain height
+     * @returns boolean
+     */
     isJumping() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -62,19 +77,30 @@ class MovableObject extends DrawableObject{
         }
     }
 
-    // nach rechts gehen
+
+    /**
+     * walk right
+     */
     walk_right() {
         this.x += this.speed;
         this.otherDirection = false;
     }
 
-    // nach links gehen
+
+    /**
+     * walk left
+     */
     walk_left() {
         this.x -= this.speed;
         this.otherDirection = true;
     }
 
-    // Berechnung Koordinaten für die Kollision der Objekte
+
+    /**
+     * Calculation of coordinates for the collision with enemies
+     * @param {object} moveObject all enemies object with properties
+     * @returns coordinates where damage is registered
+     */
     isCollidingChicken(moveObject) {
         return ( 
             this.x + this.width - this.offset.left > moveObject.x &&
@@ -84,6 +110,10 @@ class MovableObject extends DrawableObject{
         );
     }
 
+
+    /**
+     * determine when a chicken is killed 
+     */
     killChicken() {
         this.chickenEnergy -= 10;
         if (this.chickenEnergy <= 0) {
@@ -94,6 +124,11 @@ class MovableObject extends DrawableObject{
     }
     
 
+    /**
+     * Calculation of coordinates for the collision with coins or bottles
+     * @param {object} moveObject coins and bottles object with they properties
+     * @returns coordinates where damage is registered
+     */
     isCollidingCollectables(moveObject) {
         return (
         this.x + this.width - this.offset.right > moveObject.x + moveObject.offset.left &&
@@ -103,6 +138,10 @@ class MovableObject extends DrawableObject{
         );
     }
 
+
+    /**
+     * character loose energy when he hurts himself
+     */
     hurt() {
         this.energy -= 2;
         if (this.energy < 0) {
@@ -112,6 +151,10 @@ class MovableObject extends DrawableObject{
         }
     }
 
+
+    /**
+     * endboss loose energy when he hurts himself
+     */
     hurtEndboss() {
         this.energy -= 20;
         if (this.energy < 0) {
@@ -121,12 +164,20 @@ class MovableObject extends DrawableObject{
         }
     }
 
+
+    /**
+     * time difference between now and when the character is hurt for the last time
+     * @returns bolean
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHurt;
         return timepassed < 250;
     }
 
 
+    /**
+     * character can collect one coin, max. 25 coins
+     */
     collectCoin() {
         this.coin += 1;
         if (this.coin > 24) {
@@ -134,6 +185,10 @@ class MovableObject extends DrawableObject{
         }
     }
 
+
+    /**
+     * character can collect one bottle, max. 10 bottles
+     */
     collectBottle() {
         this.bottle += 1;
         if (this.bottle > 9) {
@@ -141,12 +196,20 @@ class MovableObject extends DrawableObject{
         }
     }
 
+
+    /**
+     * when the character throws a bottle, the amount is reduced by one
+     */
     reduceBottleByThrowing() {
         this.bottle -= 1;
     }
 
+
+    /**
+     * character is dead, game is over
+     * @returns energy is 0
+     */
     isDead() {
         return this.energy == 0;
     }
-
 }

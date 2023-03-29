@@ -26,6 +26,11 @@ class StatusBarBottle extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * 
+     * @returns image with the exact percentage width of the bar
+     */
     bottleStatus() {
         if (this.percentage == 0) {
             return 0;

@@ -8,12 +8,13 @@ class DrawableObject {
     width = 100;
   
 
-    // Welt zeichnen mit Koordinaten, Breite und Höhe
+    // Draw world with coordinates, width and height
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    // Rahmen um Charakter, damit Kollisionen registriert werden können
+
+    // Frame around character so that collisions can be registered
     drawFrame(ctx) {
         // Rahmen nur beim Character, Chicken oder Endboss anzeigen
         if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
@@ -25,13 +26,15 @@ class DrawableObject {
         }
     }
 
-    // erste Bild vom Objekt wird geladen
+
+    // first image of the object is loaded
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
-    // alle Bilder von den Objekten werden in das JSON "imageCache" gepusht
+    
+    // all images from the objects are pushed into the JSON "imageCache".
     loadImages(array) {
         array.forEach((path) => {
             let img = new Image();

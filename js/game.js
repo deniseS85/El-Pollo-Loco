@@ -14,6 +14,9 @@ let walk_sound = new Audio('audio/walk.mp3');
 let jump_sound = new Audio('audio/jump.mp3');
 
 
+/**
+ * onload function, first load all images from imageCache
+ */
 function init() {
     awaitLoadingImages();
     canvas = document.getElementById('canvas');
@@ -219,6 +222,7 @@ function reActivateAnimations() {
     world.character.gravity();
     world.endboss.animate();
     world.character.animate();  
+    world.character.hurtCharacter();
 }
 
 
@@ -285,12 +289,12 @@ function closePopUpGame(el) {
     isOpenPopUp = false;
 
     if (isGameStarted) {
-        isOpenPopUpinCanva(el);
+        openPopUpinCanva(el);
     }
 }
 
 
-function isOpenPopUpinCanva(el) {
+function openPopUpinCanva(el) {
     noPause(el);
     el.closest('.game-content').querySelector('.canvas-container .popUp').classList.add('d-none');
     el.closest('.game-content').querySelector('.canvas-container .play-pause').src = 'img/play.png';

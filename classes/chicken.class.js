@@ -4,7 +4,7 @@ class Chicken extends MovableObject {
     width = 80;
     height = 80;
     offset = {
-        top: 5,
+        top: 2,
         bottom: 30,
         left: 20,
         right: 20
@@ -39,6 +39,9 @@ class Chicken extends MovableObject {
     }
 
 
+    /**
+     * show images if chicken is walking
+     */
     chickenAnimation() {
         if (this.chickenEnergy == 0) {
             this.speed = 0;

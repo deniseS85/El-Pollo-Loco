@@ -28,6 +28,10 @@ class ThrowableObject extends MovableObject {
         this.throwBottle();
     }
 
+
+    /**
+     * bottles can be thrown with a defined speed and play a sound when bottle fall on the floor
+     */
     throw() {
         this.speedY = 30; // Höhe des Wurfes
         this.gravity();
@@ -39,10 +43,18 @@ class ThrowableObject extends MovableObject {
         }, 800) 
     }
 
+
+    /**
+     * Throw distance
+     */
     throwBottle() {
-        this.x += 7; // Weite des Wurfes
+        this.x += 7;
     }
 
+
+    /**
+     * when collide a bottle with enemy then show images of bottle splash, if not bottle rotated
+     */
     animate() {
         setStoppableInterval(() => {
             if (this.y > 250 || this.hurtEndboss() || this.killChicken()) {

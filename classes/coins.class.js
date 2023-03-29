@@ -21,6 +21,9 @@ class Coins extends MovableObject {
     }
         
 
+    /**
+     * show images moving coins
+     */
     moveCoins() {
         this.playAnimation(this.IMAGES_COIN);
     }

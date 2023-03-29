@@ -20,12 +20,18 @@ class StatusBarEndboss extends DrawableObject{
         this.reduceLife(100);
     }
 
+    
     reduceLife(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_LIFE_ENDBOSS[this.lifeStatus()];
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * 
+     * @returns image with the exact percentage width of the bar
+     */
     lifeStatus() {
         if (this.percentage == 100) {
             return 5;

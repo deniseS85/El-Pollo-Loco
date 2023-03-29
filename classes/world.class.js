@@ -38,12 +38,18 @@ class World {
     }
 
 
-    // damit Charakter auf Pfeiltasten reagieren kann
+    /**
+     * so that character can react to arrow keys
+     */
     setWorld() {
         this.character.world = this;
         this.endScreen.world = this;
     }
 
+
+    /**
+     * all animations are repeated in a certain time
+     */
     run() {
         setInterval(() => {
             this.checkCollisionChicken();
@@ -58,6 +64,9 @@ class World {
     }
 
     
+    /**
+     * When a chicken collides with the character
+     */
     checkCollisionChicken() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isCollidingChicken(enemy) && !this.character.isJumping() && !isPaused) {
@@ -69,6 +78,9 @@ class World {
     }
 
 
+    /**
+     * when the character jumps on a chicken
+     */
     checkJumpOnChicken() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingChicken(enemy) && this.character.isJumping() && this.character.speedY < 0) {
@@ -85,6 +97,9 @@ class World {
     }
 
 
+    /**
+     * when a chicken is hit by a bottle
+     */
     checkBottleKillChicken() {
         this.level.enemies.forEach((enemy, i) => {
             this.throwableObjects.forEach((bottle, j) => {
@@ -103,6 +118,9 @@ class World {
     }
 
 
+    /**
+     * when can a bottle be thrown
+     */
     checkTrowObject() {
         if (this.keyboard.SPACE && this.amountCollectBottles > 0 && !this.lastThrow && !this.character.isHurt()) {
             this.alreadyThrow = true;
@@ -113,6 +131,9 @@ class World {
     }
 
     
+    /**
+     * character throws a bottle
+     */
     checkThrowBottle() {
         this.lastThrow = true;
         let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 110);
@@ -134,6 +155,9 @@ class World {
     }
 
 
+    /**
+     * time is determined when the next bottle can be thrown
+     */
     timeThrowNextBottle() {
         if (this.alreadyThrow) {
             this.alreadyThrow = false;
@@ -144,6 +168,9 @@ class World {
     }
 
     
+    /**
+     * when character collects a coin
+     */
     checkCollectCoins() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isCollidingCollectables(coin)) {
@@ -158,6 +185,9 @@ class World {
     }
 
 
+    /**
+     * When the character collects a bottle
+     */
     checkCollectBottles() {
         this.level.bottles.forEach((bottle, i) => {
             if (this.character.isCollidingCollectables(bottle)) {
@@ -173,6 +203,9 @@ class World {
     }
 
     
+    /**
+     * When the character touches the end boss
+     */
     checkCollisionEndboss() {
         if (this.character.isCollidingChicken(this.endboss)) {
             this.character.hurt();
@@ -181,6 +214,9 @@ class World {
     }
 
 
+    /**
+     * when a bottle hits the end boss
+     */
     checkHitbyBottle() {
         this.throwableObjects.forEach((bottle, i) => {
             if (this.endboss.isCollidingCollectables(bottle)) {
@@ -195,11 +231,13 @@ class World {
     }
 
 
+    /**
+     * Objects are added to the Canva
+     */
     draw() {
-        // Bild wird vor dem Neuladen gelöscht
+        // Image is deleted before reloading
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this. camera_x, 0);
-        // Objekte werden hinzugefügt zum Canva
         this.addObjectsToMap(this.level.background);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
@@ -217,7 +255,7 @@ class World {
             this.addToMap(this.statusBarEndboss);
             this.addToMap(this.statusBarEndbossIcon);
         }
-        // Draw() wird immer wieder aufgerufen
+        // Draw() is called again and again
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
@@ -225,7 +263,10 @@ class World {
     }
 
     
-    // Arrays werden durchlaufen, damit alle Objekte zum Canvas hinzugefügt werden
+    /**
+     * Arrays are traversed so that all objects are added to the canvas
+     * @param {object} objects 
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -233,37 +274,48 @@ class World {
     }
 
 
+    /**
+     * Image are added to the canvas
+     * @param {object} moveObject 
+     */
     addToMap(moveObject) {
-         // Spiegelung vom Charakter
+         // Reflection from the character
         if(moveObject.otherDirection) {
             this.flipImage(moveObject);
         }
 
-        // Welt zeichnen mit Koordinaten, Breite und Höhe
+        // Draw world with coordinates, width and height
         moveObject.draw(this.ctx);
 
-        // Rahmen um Charakter, damit Kollisionen registriert werden können
+        // Frame around character so that collisions can be registered
         moveObject.drawFrame(this.ctx);
         
-        // Spiegelung für andere Objekte deaktivieren
+        // Deactivate mirroring for other objects
         if(moveObject.otherDirection) {
             this.flipImageBack(moveObject)
         }
     }
 
 
-    // Spiegelung des Charakters
+    /**
+     * Reflection of the character
+     * @param {object} moveObject 
+     */
     flipImage(moveObject) {
-        this.ctx.save(); // Eigenschaften vom Canvas werden gespeichert (wie Screenshot)
-        this.ctx.translate(moveObject.width, 0); // Verschieben Weite des Characters, um die Position zu behalten (sonst springt er nach links)
-        this.ctx.scale(-1, 1); //Spiegelung um die eigene Achse --> (-1/1)
-        moveObject.x = moveObject.x * -1; // x-Achse wird gespiegelt
+        this.ctx.save(); // Canvas properties are saved (like screenshot)
+        this.ctx.translate(moveObject.width, 0); // Move width of the character to keep the position (otherwise it jumps to the left)
+        this.ctx.scale(-1, 1); //Mirroring around its own axis --> (-1/1)
+        moveObject.x = moveObject.x * -1; // x-axis is mirrored
     }
 
 
+    /**
+     * Dereflection of the character
+     * @param {object} moveObject 
+     */
     flipImageBack(moveObject) {
-        moveObject.x = moveObject.x * -1; // x-Achse wird wieder ungespiegelt
-        this.ctx.restore(); // reseten zu dem Punkt vor Spiegelung zurück, damit alle anderen Objekte nicht gespiegelt werden
+        moveObject.x = moveObject.x * -1; // x-axis is unmirrored again
+        this.ctx.restore(); // Reset to the point before mirroring so that all other objects are not mirrored.
     }
    
 }

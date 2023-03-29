@@ -4,7 +4,7 @@ class SmallChicken extends MovableObject {
     width = 50;
     height = 50;
     offset = {
-        top: 9,
+        top: 10,
         bottom: 10,
         left: 2,
         right: 2,
@@ -37,6 +37,9 @@ class SmallChicken extends MovableObject {
     }
 
 
+    /**
+     * show images when chicken is still alive then walk, if is dead then show dead images
+     */
     littleChickenAnimation() {
         if (this.chickenEnergy == 0) {
             this.speed = 0;

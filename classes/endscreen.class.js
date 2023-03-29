@@ -35,6 +35,9 @@ class EndScreen extends MovableObject {
     }
 
 
+    /**
+     * if character won the game
+     */
     gameWon() {
         setTimeout(() => {
             this.img = new Image();
@@ -48,6 +51,10 @@ class EndScreen extends MovableObject {
         }, 200);
     }
 
+
+    /**
+     * if character loses the game
+     */
     gameLost() {
         setTimeout(() => {
             this.img = new Image();
